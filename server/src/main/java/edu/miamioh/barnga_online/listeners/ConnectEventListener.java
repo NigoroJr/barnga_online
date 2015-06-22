@@ -1,5 +1,7 @@
 package edu.miamioh.barnga_online.listeners;
 
+import java.util.Set;
+
 import com.corundumstudio.socketio.BroadcastOperations;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -93,6 +95,8 @@ public class ConnectEventListener implements ConnectListener {
             Util.debug("Sent to %d about the new player %d\n", t.getTeamId(), playerId);
         }
 
+        sendPoints(client);
+
         if (world.isGameStarted()) {
             client.sendEvent(Constants.EVENT_GAME_START);
         }
@@ -100,6 +104,23 @@ public class ConnectEventListener implements ConnectListener {
             server.getBroadcastOperations().sendEvent(Constants.EVENT_GAME_START);
             world.setGameStarted(true);
             Util.debug("Game has started!");
+        }
+    }
+
+    /**
+     * Sends the current points status to the newly connected client.
+     *
+     * @param client the client that connected
+     */
+    private void sendPoints(SocketIOClient client) {
+        Set<Integer> teamIds = world.getPoints().keySet();
+        for (int id : teamIds) {
+            Util.debug("foo");
+            int currentPoints = world.getPoints().get(id).getTotal();
+            MessagePointsUpdate mes = new MessagePointsUpdate(id, currentPoints);
+
+            client.sendEvent(Constants.EVENT_POINTS_UPDATE, mes);
+            Util.debug("Sent points to %d (%d)\n", id, currentPoints);
         }
     }
 }
