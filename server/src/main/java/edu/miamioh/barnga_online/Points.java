@@ -9,13 +9,21 @@ public class Points {
     /**
      * Class that has information about who earned how many points.
      */
-    private class Earner {
+    public class Earner {
         private Player player;
         private int amount;
 
         public Earner(Player player, int amount) {
             this.player = player;
             this.amount = amount;
+        }
+
+        public Player getPlayer() {
+            return player;
+        }
+
+        public int getAmount() {
+            return amount;
         }
     }
 
@@ -36,5 +44,17 @@ public class Points {
 
     public void subtractPoints(Player player, int amount) {
         addPoints(player, -amount);
+    }
+
+    public ArrayList<Earner> getEarners() {
+        return earners;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }

@@ -112,4 +112,13 @@ public interface BarngaOnlineConfigs {
      * @return true if player can see the food, false if not
      */
     public boolean foodVisible(Player player, Food food);
+
+    /**
+     * Handles points-related behavior when getting food.
+     *
+     * @param player the player who ate the food
+     *
+     * @param food the food that was eaten
+     */
+    public void handlePoints(Player player, Food food);
 }
