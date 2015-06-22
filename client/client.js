@@ -248,7 +248,6 @@ function drawGame() {
   //clearCanvas();
 
   canvasContext.translate(bufferX - myPlayer.coord.x, bufferY - myPlayer.coord.y);
-  //canvasContext.translate(bufferX, bufferY);
 
   for (var i = 0; i <= worldInfo.width; i += gridInfo.width) {
     canvasContext.beginPath();
@@ -265,22 +264,18 @@ function drawGame() {
     canvasContext.stroke();
   }
 
-  //might be able to get rid of this. see other one above
-  drawPlayer(myPlayer.coord.x, myPlayer.coord.y, myPlayer.teamId);
 
-  //TODO draw players
+  for (f in food) {
+    var fd = food[f];
+    drawFood(fd.coord.x, fd.coord.y, foodInfo.size, fd.team);
+  }
+
   for (p in players) {
     var player = players[p];
     drawPlayer(player.coord.x, player.coord.y, player.teamId);
   }
 
-  //TODO draw food
-  //**
-  for (f in food) {
-    var fd = food[f];
-    drawFood(fd.coord.x, fd.coord.y, foodInfo.size, fd.team);
-  }
-  //*/
+  drawPlayer(myPlayer.coord.x, myPlayer.coord.y, myPlayer.teamId);
 
   canvasContext.setTransform(1, 0, 0, 1, 0, 0);
 
@@ -374,8 +369,8 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
   }
 });
 
-socket.on('pointsUpdate', function(pointMes) {
-  document.getElementById(pointMes.id).innerHTML = pointMes.score;
+socket.on('pointsUpdate', function(teamId, newPoint) {
+  document.getElementById(teamId).innerHTML = newPoint;
 });
 
 window.requestAnimationFrame = (function() {
