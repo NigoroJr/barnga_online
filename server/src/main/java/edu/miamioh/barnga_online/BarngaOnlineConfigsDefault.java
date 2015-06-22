@@ -17,6 +17,8 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     /* Used when assigning team */
     public static final int TEAM_NUMBER = 4;
     public static final int FOOD_PER_TEAM = 10;
+    public static final int OWN_TEAM_FOOD_POINTS = 3;
+    public static final int OTHER_TEAM_FOOD_POINTS = 1;
 
     private int playerCounter = 0;
 
@@ -155,6 +157,20 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
         }
 
         return player.canSee(food);
+    }
+
+    @Override
+    public void handlePoints(Player player, Food food) {
+        Points points = world.getPoints().get(player.teamId);
+        int amount;
+        if (food.team == player.teamId) {
+            amount = OWN_TEAM_FOOD_POINTS;
+        }
+        else {
+            amount = OTHER_TEAM_FOOD_POINTS;
+        }
+
+        points.addPoints(player, amount);
     }
 
     public int[][] getPlayerVisibility() {

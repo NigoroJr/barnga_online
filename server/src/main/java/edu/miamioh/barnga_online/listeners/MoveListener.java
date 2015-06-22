@@ -100,6 +100,10 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
 
         // Note: Most likely food will be removed from world here
         configs.eatFoodCallback(player, food);
+        // Broadcast about the point change
+        configs.handlePoints(player, food);
+        broadcastPoints(player.teamId);
+
         // Note: And potentially get generated here
         HashSet<Food> addedFood = configs.generateFood(player, food);
 
@@ -139,5 +143,18 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
                     Integer.toString(t.getTeamId()));
             team.sendEvent(Constants.EVENT_FOOD_UPDATE, mes);
         }
+    }
+
+    /**
+     * Broadcasts the changed points status to all the teams.
+     *
+     * @param teamId the ID of the team whose points were changed
+     */
+    private void broadcastPoints(int teamId) {
+        int newPoint = world.getPoints().get(teamId).getTotal();
+        MessagePointsUpdate mes = new MessagePointsUpdate(teamId, newPoint);
+
+        server.getBroadcastOperations().sendEvent(
+                Constants.EVENT_POINTS_UPDATE, mes);
     }
 }

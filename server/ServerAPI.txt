@@ -69,10 +69,8 @@ Events FROM server
 * foodUpdate
     - MessageFoodCoord
 
-Optional (not necessary for prototype)
-# The updated point of the player. (Team can be accessed via player.teamId)
-# TODO: The data type sent may change
-* pointUpdate
+# The updated points of the team
+* pointsUpdate
     - MessagePointsUpdate
 
 

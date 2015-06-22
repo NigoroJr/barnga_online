@@ -17,8 +17,7 @@ public class Constants {
     public static final String EVENT_GAME_START = "gameStart";
     public static final String EVENT_PLAYER_UPDATE = "playerUpdate";
     public static final String EVENT_FOOD_UPDATE = "foodUpdate";
-    // Note: Following events are optional for the prototype
-    public static final String EVENT_POINT_UPDATE = "pointUpdate";
+    public static final String EVENT_POINTS_UPDATE = "pointsUpdate";
 
     /* Events sent TO the server */
     public static final String EVENT_MOVE = "move";
