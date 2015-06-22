@@ -94,7 +94,7 @@ var startGame = false;
 var players = {};
 var food = {};
 // Dummy data
-var myPlayer; // = {id: 42, teamId: 42, coord: {x: 42, y: 42}};
+var myPlayer= {id: 42, teamId: 42, coord: {x: 42, y: 42}};
 
 var canvas = document.getElementById('gameCanvas');
 canvas.width = worldInfo.width;
