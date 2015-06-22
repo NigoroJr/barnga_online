@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <title>netty-socketio Test page</title>
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
   </head>
 
-  <body>
-    <ul class="move_buttons">
-      <li><button id="up" onclick="move('up')">Up</button></li>
-      <li><button id="down" onclick="move('down')">Down</button></li>
-      <li><button id="left" onclick="move('left')">Left</button></li>
-      <li><button id="right" onclick="move('right')">Right</button></li>
-    </ul>
+  <body style="overflow: hidden">
 
-    <section id="current_team"></section>
+    <div class = "scoreboard">
 
-    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <div class = "red_team"></div>
+      <div class = "yellow_team"></div>
+      <div class = "green_team"></div>
+      <div class = "blue_team"></div>
 
-    <script src="client.js"></script>
+      <div class = "red_label" id = "0"></div>
+      <div class = "yellow_label" id = "1"></div>
+      <div class = "green_label" id = "2"></div>
+      <div class = "blue_label" id = "3" ></div>
+
+    </div>
+
+    <canvas id = "gameCanvas"></canvas>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src = "game.js"></script>
+
   </body>
+
 </html>
