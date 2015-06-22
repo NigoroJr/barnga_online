@@ -115,12 +115,10 @@ public class ConnectEventListener implements ConnectListener {
     private void sendPoints(SocketIOClient client) {
         Set<Integer> teamIds = world.getPoints().keySet();
         for (int id : teamIds) {
-            Util.debug("foo");
             int currentPoints = world.getPoints().get(id).getTotal();
             MessagePointsUpdate mes = new MessagePointsUpdate(id, currentPoints);
 
             client.sendEvent(Constants.EVENT_POINTS_UPDATE, mes);
-            Util.debug("Sent points to %d (%d)\n", id, currentPoints);
         }
     }
 }
