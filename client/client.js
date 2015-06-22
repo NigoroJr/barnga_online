@@ -369,7 +369,9 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
   }
 });
 
-socket.on('pointsUpdate', function(teamId, newPoint) {
+socket.on('pointsUpdate', function(mes) {
+  var teamId = mes.teamId;
+  var newPoint = mes.newPoint;
   document.getElementById(teamId).innerHTML = newPoint;
 });
 
