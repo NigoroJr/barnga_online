@@ -300,6 +300,11 @@ socket.on('gameStart', function() {
   startGame = true;
 });
 
+socket.on('gameEnd', function() {
+  console.log('Game has ended');
+  startGame = false;
+});
+
 socket.on('playerId', function(MessagePlayerId) {
   myPlayer = MessagePlayerId;
 
@@ -393,14 +398,14 @@ window.requestAnimationFrame = (function() {
 function gameLoop() {
 
   // if (connected) {
-  //     if (startGame) {
-  clearCanvas();
-  playerControls();
-  drawGame();
-  //     }
-  //     else {
-  //         //TODO Lost
-  //     }
+  if (startGame) {
+    clearCanvas();
+    playerControls();
+    drawGame();
+  }
+  else {
+    //TODO Lost
+  }
   // }
   // else {
   //     //TODO disconnected

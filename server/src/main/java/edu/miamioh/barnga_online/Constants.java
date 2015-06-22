@@ -15,6 +15,7 @@ public class Constants {
     public static final String EVENT_PLAYER_ID = "playerId";
     public static final String EVENT_DISCONNECT = "disconnect";
     public static final String EVENT_GAME_START = "gameStart";
+    public static final String EVENT_GAME_END = "gameEnd";
     public static final String EVENT_PLAYER_UPDATE = "playerUpdate";
     public static final String EVENT_FOOD_UPDATE = "foodUpdate";
     public static final String EVENT_POINTS_UPDATE = "pointsUpdate";

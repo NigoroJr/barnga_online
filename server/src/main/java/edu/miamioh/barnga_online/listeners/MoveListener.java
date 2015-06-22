@@ -45,11 +45,6 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
 
         // Handle food
         handleFood(player, newCoord);
-
-        if (configs.gameEnds()) {
-            Util.debug("Game has finished!");
-            // TODO: Do something
-        }
     }
 
     /**

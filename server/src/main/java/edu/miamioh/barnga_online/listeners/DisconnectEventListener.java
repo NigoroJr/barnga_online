@@ -45,5 +45,11 @@ public class DisconnectEventListener implements DisconnectListener {
             BroadcastOperations room = server.getRoomOperations(roomName);
             room.sendEvent(Constants.EVENT_DISCONNECT, mes);
         }
+
+        if (configs.gameEnds()) {
+            server.getBroadcastOperations().sendEvent(Constants.EVENT_GAME_END);
+            world.setGameStarted(false);
+            Util.debug("Game has finished!");
+        }
     }
 }
