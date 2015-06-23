@@ -67,7 +67,12 @@ public interface BarngaOnlineConfigs {
     public void bumpFoodCallback(Player player, Food food);
 
     /**
-     * Callback method when getting points for collecting food
+     * Callback method when player collects food.
+     *
+     * This method does NOT handle the points. handlePoints() method is called
+     * when a player eats a food, so this method does not need to do that.
+     * This method Typically only removes the food (regenerating the food is
+     * done in generateFood() method).
      *
      * @param player the player who bumped into the food
      *

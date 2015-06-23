@@ -363,6 +363,7 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
   if (gone) {
     // Delete food from field
     delete food[f.id];
+    console.log("Deleted food %d\n", f.id);
   }
   else {
     food[f.id] = f;

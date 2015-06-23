@@ -25,6 +25,9 @@ public class ConnectEventListener implements ConnectListener {
         this.server = server;
     }
 
+    /**
+     * TODO: separate this into multiple methods
+     */
     @Override
     public void onConnect(SocketIOClient client) {
         // Assign player to a team
