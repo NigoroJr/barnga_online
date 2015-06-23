@@ -105,6 +105,9 @@ public class ConnectEventListener implements ConnectListener {
 
         sendPoints(client);
 
+        configs.onConnectCallback(p);
+
+        // Handle game start
         if (world.isGameStarted()) {
             client.sendEvent(Constants.EVENT_GAME_START);
         }

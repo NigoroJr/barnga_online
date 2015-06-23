@@ -38,6 +38,13 @@ public interface BarngaOnlineConfigs {
     public boolean gameEnds();
 
     /**
+     * Called when a client connects to the game.
+     *
+     * @param player the player who connected
+     */
+    public void onConnectCallback(Player player);
+
+    /**
      * Callback method when bumping into a different player.
      *
      * This method does not need to do anything if there is no particular

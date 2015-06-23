@@ -14,12 +14,14 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     public static final int VIEW_Y = 3000;
     /* Used when assigning team */
     public static final int TEAM_NUMBER = 4;
-    public static final int FOOD_PER_TEAM = 10;
+    public static final int FOOD_PER_PLAYER = 10;
+    public static final int MAXIMUM_FOOD_PER_TEAM = 100;
     /* How many points a player gets when eating a food */
     public static final int OWN_TEAM_FOOD_POINTS = 3;
     public static final int OTHER_TEAM_FOOD_POINTS = 1;
 
     private int playerCounter = 0;
+    private int foodCounter = 0;
 
     protected WorldState world;
     /* Rows => self, Cols => other teams */
@@ -63,23 +65,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
         };
         foodVisibility = foodVisibilityCopy;
 
-        // Place food on world
-        int foodCounter = 0;
-        Util.debug("Here's a list of generated food");
-        for (int i = 0; i < TEAM_NUMBER; i++) {
-            for (int j = 0; j < FOOD_PER_TEAM; j++) {
-                int x = (int)(Math.random() * WORLD_X);
-                int y = (int)(Math.random() * WORLD_Y);
-                Coordinates coord = new Coordinates(x, y);
-                Food food = new Food(foodCounter, i, coord, this);
-
-                world.addFood(food);
-                Util.debug("%s ", food.coord.toString());
-
-                foodCounter++;
-            }
-        }
-        Util.debug("\n");
+        // Food will be generated per client connection
     }
 
     /**
@@ -109,6 +95,25 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
         // Finish game when all foods are taken
         return world.getFoods().size() == 0
             || world.getPlayers().size() < TEAM_NUMBER;
+    }
+
+    @Override
+    public void onConnectCallback(Player player) {
+        // Place food on world
+        Util.debug("Generated food");
+
+        int teamId = player.teamId;
+        for (int i = 0; i < FOOD_PER_PLAYER; i++) {
+            int x = (int)(Math.random() * WORLD_X);
+            int y = (int)(Math.random() * WORLD_Y);
+            Coordinates coord = new Coordinates(x, y);
+            Food food = new Food(foodCounter, teamId, coord, this);
+
+            world.addFood(food);
+
+            foodCounter++;
+            Util.debug("Team %d: %s\n", teamId, food.coord.toString());
+        }
     }
 
     @Override
