@@ -12,11 +12,10 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     public static final int WORLD_Y = 3000;
     public static final int VIEW_X = 3000;
     public static final int VIEW_Y = 3000;
-    /* How many points a player gets when eating a food */
-    public static final int FOOD_COLLECT_POINTS = 1;
     /* Used when assigning team */
     public static final int TEAM_NUMBER = 4;
     public static final int FOOD_PER_TEAM = 10;
+    /* How many points a player gets when eating a food */
     public static final int OWN_TEAM_FOOD_POINTS = 3;
     public static final int OTHER_TEAM_FOOD_POINTS = 1;
 
@@ -124,7 +123,6 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     @Override
     public void eatFoodCallback(Player player, Food food) {
-        world.addPointsEarnedBy(player, FOOD_COLLECT_POINTS);
         world.removeFood(food);
 
         Util.debug("Player %d of Team %d ate Food ID %d\n",
@@ -161,7 +159,6 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     @Override
     public void handlePoints(Player player, Food food) {
-        Points points = world.getPoints().get(player.teamId);
         int amount;
         if (food.team == player.teamId) {
             amount = OWN_TEAM_FOOD_POINTS;
@@ -170,7 +167,8 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
             amount = OTHER_TEAM_FOOD_POINTS;
         }
 
-        points.addPoints(player, amount);
+        Points teamPoints = world.getPoints().get(player.teamId);
+        teamPoints.addPoints(player, amount);
     }
 
     public int[][] getPlayerVisibility() {

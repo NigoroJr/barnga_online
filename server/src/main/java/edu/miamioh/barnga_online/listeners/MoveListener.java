@@ -102,8 +102,8 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
         // Note: And potentially get generated here
         HashSet<Food> addedFood = configs.generateFood(player, food);
 
-        // First, broadcast about the food that was taken
-        boolean gone = world.foodAt(newCoord) == null;
+        // First, broadcast whether the food that was taken
+        boolean gone = world.getFoods().get(food.id) == null;
         broadcastFood(food, gone);
 
         // Then, broadcast about the newly-generated food (if any)

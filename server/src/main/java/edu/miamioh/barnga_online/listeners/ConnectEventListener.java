@@ -44,6 +44,11 @@ public class ConnectEventListener implements ConnectListener {
         }
         client.joinRoom(Integer.toString(teamId));
 
+        // Initialize points if it's first time adding points
+        if (!world.getPoints().containsKey(teamId)) {
+            world.getPoints().put(teamId, new Points());
+        }
+
         Util.debug("Player ID %d connected at %s\n", playerId, coord);
 
         // Send player's identity

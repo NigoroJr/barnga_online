@@ -89,6 +89,8 @@ public class WorldState {
      * The keys are the team's ID, and the values are the total points for
      * that team.
      *
+     * TODO: getPoints(int teamId) to get the points for one team
+     *
      * @return Dictionary (key: team ID, value: total team point) of all teams
      */
     public HashMap<Integer, Points> getPoints() {
@@ -159,39 +161,6 @@ public class WorldState {
      */
     public void removeFood(Food food) {
         foods.remove(food.id);
-    }
-
-    /**
-     * Adds point earned by a player to its team.
-     *
-     * @param player the player who earned the points
-     *
-     * @param amount the amount of points to be added
-     */
-    public void addPointsEarnedBy(Player player, int amount) {
-        int teamId = player.teamId;
-
-        // Initialize if it's first time adding points
-        if (!points.containsKey(teamId)) {
-            points.put(teamId, new Points());
-        }
-
-        Points teamPoints = points.get(teamId);
-        teamPoints.addPoints(player, amount);
-    }
-
-    /**
-     * Subtracts point lost by a player from its team.
-     *
-     * This method does not check whether the resulting point is going to be
-     * negative.
-     *
-     * @param player the player who lost the points
-     *
-     * @param amount the amount of points to be subtracted
-     */
-    public void subtractPointsLostBy(Player player, int amount) {
-        addPointsEarnedBy(player, -amount);
     }
 
     public int getWorldSizeX() {
