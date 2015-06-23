@@ -53,6 +53,8 @@ public class ConnectEventListener implements ConnectListener {
 
         // Send player's identity
         client.sendEvent(Constants.EVENT_PLAYER_ID, new MessagePlayerId(p));
+        // Generate food for player's team
+        configs.onConnectCallback(p);
 
         sendFoods(p, client);
         sendPlayers(p, client);
@@ -120,7 +122,6 @@ public class ConnectEventListener implements ConnectListener {
                 // Broadcast to existing teams
                 Food fakeFood = new Food(f);
                 fakeFood.team = f.appearsTo(t);
-        configs.onConnectCallback(p);
 
                 MessageFoodCoord mes =
                     new MessageFoodCoord(fakeFood, f.coord, false);
