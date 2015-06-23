@@ -213,6 +213,23 @@ public class WorldState {
     }
 
     /**
+     * Returns a player visible to the given player near the given
+     * coordinates.
+     *
+     * The returned player is NOT necessarily the closest player.
+     */
+    public Player visiblePlayerNear(Player player, Coordinates baseCoord,
+            double validDistance) {
+        for (Player p : playersNear(baseCoord, validDistance)) {
+            if (!player.equals(p) && player.canSee(p)) {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Returns a visible player near the given player.
      *
      * The returned player is NOT necessarily the closest player.
@@ -225,13 +242,7 @@ public class WorldState {
      *         if no player is around.
      */
     public Player visiblePlayerNear(Player player, double validDistance) {
-        for (Player p : playersNear(player.coord, validDistance)) {
-            if (!player.equals(p) && player.canSee(p)) {
-                return p;
-            }
-        }
-
-        return null;
+        return visiblePlayerNear(player, player.coord, validDistance);
     }
 
     /**
