@@ -15,8 +15,6 @@ public class WorldState {
     protected HashMap<Integer, Points> points;
 
     protected int worldSizeX, worldSizeY;
-    /* Size of the field viewable to the players on the client side */
-    protected int viewSizeX, viewSizeY;
 
     /* Associates SocketIOClient to Player */
     protected HashMap<SocketAddress, Player> clients;
@@ -177,22 +175,6 @@ public class WorldState {
 
     public void setWorldSizeY(int worldSizeY) {
         this.worldSizeY = worldSizeY;
-    }
-
-    public int getViewSizeX() {
-        return viewSizeX;
-    }
-
-    public int getViewSizeY() {
-        return viewSizeY;
-    }
-
-    public void setViewSizeX(int viewSizeX) {
-        this.viewSizeX = viewSizeX;
-    }
-
-    public void setViewSizeY(int viewSizeY) {
-        this.viewSizeY = viewSizeY;
     }
 
     /**

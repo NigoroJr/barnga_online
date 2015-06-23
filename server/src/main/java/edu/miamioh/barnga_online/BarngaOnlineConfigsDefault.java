@@ -10,8 +10,6 @@ import java.util.HashSet;
 public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     public static final int WORLD_X = 3000;
     public static final int WORLD_Y = 3000;
-    public static final int VIEW_X = 3000;
-    public static final int VIEW_Y = 3000;
     /* Used when assigning team */
     public static final int TEAM_NUMBER = 4;
     public static final int FOOD_PER_PLAYER = 10;
@@ -43,9 +41,6 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     public void initParams() {
         world.setWorldSizeX(WORLD_X);
         world.setWorldSizeY(WORLD_Y);
-
-        world.setViewSizeX(VIEW_X);
-        world.setViewSizeY(VIEW_Y);
 
         /* Player visibility */
         int[][] playerVisibilityCopy = {
