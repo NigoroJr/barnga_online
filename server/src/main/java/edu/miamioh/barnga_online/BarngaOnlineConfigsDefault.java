@@ -87,7 +87,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     @Override
     public boolean gameStarts() {
         Util.debug("We have %d players\n", world.getPlayers().size());
-        return world.getPlayers().size() >= 4;
+        return world.getPlayers().size() >= TEAM_NUMBER;
     }
 
     @Override
@@ -144,6 +144,15 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
         Util.debug("Player %d of Team %d ate Food ID %d\n",
                 player.id, player.teamId, food.id);
+        int[] counts = new int[TEAM_NUMBER];
+        for (Food f : world.getFoods().values()) {
+            counts[f.team]++;
+        }
+        Util.debug("Remaining food");
+        for (int i = 0; i < counts.length; i++) {
+            Util.debug("%2d ", counts[i]);
+        }
+        Util.debug("");
     }
 
     @Override

@@ -77,7 +77,7 @@ public class WorldState {
      *
      * The keys are the food's ID, and the values are the Food object.
      *
-     * @return Dictionary (key: food ID, valu: Food) of all food
+     * @return Dictionary (key: food ID, value: Food) of all food
      */
     public HashMap<Integer, Food> getFoods() {
         return foods;
