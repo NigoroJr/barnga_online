@@ -93,8 +93,20 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     @Override
     public boolean gameEnds() {
         // Finish game when all foods are taken
-        return world.getFoods().size() == 0
-            || world.getPlayers().size() < TEAM_NUMBER;
+        boolean[] ateAll = new boolean[TEAM_NUMBER];
+        for (int i = 0; i < ateAll.length; i++) {
+            ateAll[i] = true;
+        }
+
+        for (Food f : world.getFoods().values()) {
+            ateAll[f.team] = false;
+        }
+
+        boolean gameEnds = false;
+        for (boolean b : ateAll) {
+            gameEnds = gameEnds || b;
+        }
+        return gameEnds;
     }
 
     @Override
