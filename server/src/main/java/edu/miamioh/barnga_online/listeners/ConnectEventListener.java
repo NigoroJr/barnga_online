@@ -54,55 +54,9 @@ public class ConnectEventListener implements ConnectListener {
         // Send player's identity
         client.sendEvent(Constants.EVENT_PLAYER_ID, new MessagePlayerId(p));
 
-        // Send visible food information
-        for (Food f : world.getFoods().values()) {
-            if (p.canSee(f)) {
-                Food fakeFood = new Food(f);
-                fakeFood.team = f.appearsTo(p);
-
-                MessageFoodCoord mes =
-                    new MessageFoodCoord(fakeFood, f.coord, false);
-                client.sendEvent(Constants.EVENT_FOOD_UPDATE, mes);
-            }
-        }
-
-        Util util = new Util(world, (BarngaOnlineConfigsDefault)configs);
-        // Broadcast about existing players to new player
-        for (Team<Player> t : world.getTeams().values()) {
-            for (Player otherPlayer : t) {
-                // If the new player can't see the existing player
-                if (!p.canSee(otherPlayer)) {
-                    continue;
-                }
-
-                // Fake player (potentially with incorrect team information)
-                MessagePlayerCoord mes =
-                    util.makeFakePlayerMessage(p, otherPlayer, otherPlayer.coord);
-
-                // Broadcast to one team
-                client.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
-            }
-        }
-        Util.debug("Sent to %d about existing players\n", playerId);
-
-        // Send message to currently existing teams
-        for (Team<Player> t : world.getTeams().values()) {
-            if (!t.canSee(p)) {
-                continue;
-            }
-
-            // Broadcast TO existing player
-            MessagePlayerCoord mes = util.makeFakePlayerMessage(t, p, p.coord);
-            String roomName = Integer.toString(t.getTeamId());
-            BroadcastOperations room = server.getRoomOperations(roomName);
-            room.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
-
-            Util.debug("Sent to %d about the new player %d\n", t.getTeamId(), playerId);
-        }
-
+        sendFoods(p, client);
+        sendPlayers(p, client);
         sendPoints(client);
-
-        configs.onConnectCallback(p);
 
         // Handle game start
         if (world.isGameStarted()) {
@@ -113,6 +67,69 @@ public class ConnectEventListener implements ConnectListener {
             world.setGameStarted(true);
             Util.debug("Game has started!");
         }
+    }
+
+    private void sendPlayers(Player player, SocketIOClient client) {
+        Util util = new Util(world, (BarngaOnlineConfigsDefault)configs);
+        // Broadcast about existing players to new player
+        for (Team<Player> t : world.getTeams().values()) {
+            for (Player otherPlayer : t) {
+                // If the new player can't see the existing player
+                if (!player.canSee(otherPlayer)) {
+                    continue;
+                }
+
+                // Fake player (potentially with incorrect team information)
+                MessagePlayerCoord mes = util.makeFakePlayerMessage(
+                        player, otherPlayer, otherPlayer.coord);
+
+                // Broadcast to one team
+                client.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
+            }
+        }
+        Util.debug("Sent to %d about existing players\n", player.id);
+
+        // Send message to currently existing teams
+        for (Team<Player> t : world.getTeams().values()) {
+            if (!t.canSee(player)) {
+                continue;
+            }
+
+            // Broadcast TO existing player
+            MessagePlayerCoord mes =
+                util.makeFakePlayerMessage(t, player, player.coord);
+            String roomName = Integer.toString(t.getTeamId());
+            BroadcastOperations room = server.getRoomOperations(roomName);
+            room.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
+        }
+        Util.debug("Sent to existing teams about Player %d\n", player.id);
+    }
+
+    /**
+     * Sends to the newly connected client about the current status of the
+     * food.
+     */
+    private void sendFoods(Player player, SocketIOClient client) {
+        // Send message to currently existing teams including the new player
+        for (Team<Player> t : world.getTeams().values()) {
+            for (Food f : world.getFoods().values()) {
+                if (!t.canSee(f)) {
+                    continue;
+                }
+
+                // Broadcast to existing teams
+                Food fakeFood = new Food(f);
+                fakeFood.team = f.appearsTo(t);
+        configs.onConnectCallback(p);
+
+                MessageFoodCoord mes =
+                    new MessageFoodCoord(fakeFood, f.coord, false);
+                String roomName = Integer.toString(t.getTeamId());
+                BroadcastOperations room = server.getRoomOperations(roomName);
+                room.sendEvent(Constants.EVENT_FOOD_UPDATE, mes);
+            }
+        }
+        Util.debug("Sent to existing teams about new food state");
     }
 
     /**
