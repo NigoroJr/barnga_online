@@ -24,6 +24,11 @@
       <artifactId>netty-socketio</artifactId>
       <version>1.7.7</version>
     </dependency>
+    <dependency>
+      <groupId>com.moandjiezana.toml</groupId>
+      <artifactId>toml4j</artifactId>
+      <version>0.4.0</version>
+    </dependency>
   </dependencies>
 
   <build>

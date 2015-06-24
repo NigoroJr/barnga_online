@@ -8,27 +8,39 @@ import java.util.HashSet;
  * @author Naoki Mizuno
  */
 public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
-    public static final int WORLD_X = 3000;
-    public static final int WORLD_Y = 3000;
+    /* Default values */
+    public static final int DEFAULT_WORLD_X = 3000;
+    public static final int DEFAULT_WORLD_Y = 3000;
     /* Used when assigning team */
-    public static final int TEAM_NUMBER = 4;
-    public static final int FOOD_PER_PLAYER = 10;
-    public static final int MAXIMUM_FOOD_PER_TEAM = 100;
+    public static final int DEFAULT_TEAM_NUMBER = 4;
+    public static final int DEFAULT_FOOD_PER_PLAYER = 10;
+    public static final int DEFAULT_MAXIMUM_FOOD_PER_TEAM = 100;
     /* How many points a player gets when eating a food */
-    public static final int OWN_TEAM_FOOD_POINTS = 3;
-    public static final int OTHER_TEAM_FOOD_POINTS = 1;
+    public static final int DEFAULT_OWN_TEAM_FOOD_POINTS = 3;
+    public static final int DEFAULT_OTHER_TEAM_FOOD_POINTS = 2;
 
-    private int playerCounter = 0;
-    private int foodCounter = 0;
+    /* Invisible */
+    public static final int INVISIBLE = -1;
+    // Just an abbreviation to make the table look nicer
+    public static final int I = INVISIBLE;
+
+    /* Will get updated on reading configuration file */
+    /* Note: These are NOT constants (even though they act like them) */
+    protected int WORLD_X = DEFAULT_WORLD_X;
+    protected int WORLD_Y = DEFAULT_WORLD_Y;
+    protected int TEAM_NUMBER = DEFAULT_TEAM_NUMBER;
+    protected int FOOD_PER_PLAYER = DEFAULT_FOOD_PER_PLAYER;
+    protected int MAXIMUM_FOOD_PER_TEAM = DEFAULT_MAXIMUM_FOOD_PER_TEAM;
+    protected int OWN_TEAM_FOOD_POINTS = DEFAULT_OWN_TEAM_FOOD_POINTS;
+    protected int OTHER_TEAM_FOOD_POINTS = DEFAULT_OTHER_TEAM_FOOD_POINTS;
 
     protected WorldState world;
     /* Rows => self, Cols => other teams */
     protected int[][] playerVisibility;
     protected int[][] foodVisibility;
-    /* Invisible */
-    public static final int INVISIBLE = -1;
-    // Just an abbreviation to make the table look nicer
-    public static final int I = INVISIBLE;
+
+    private int playerCounter = 0;
+    private int foodCounter = 0;
 
     BarngaOnlineConfigsDefault(WorldState world) {
         this.world = world;

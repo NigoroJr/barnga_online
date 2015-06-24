@@ -3,7 +3,7 @@ var screenWidth = window.innerWidth;
 var screenHeight = window.innerHeight;
 
 //This starts the server side of socket.io
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect('http://10.33.50.149:3000');
 
 //Team Colors
 var teamColors = ['#FF0000', '#ffff00', '#00ff00', '#0000ff'];

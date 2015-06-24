@@ -8,7 +8,7 @@ public class Constants {
 
     public static final String SERVER_QUIT = "q";
 
-    public static final String HOSTNAME = "localhost";
+    public static final String HOSTNAME = "10.33.50.149";
     public static final int PORT = 3000;
 
     /* Events sent FROM the server */

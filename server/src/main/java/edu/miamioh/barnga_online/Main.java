@@ -29,7 +29,8 @@ public class Main {
 
         // Game setup
         WorldState world = new WorldState();
-        BarngaOnlineConfigsDefault barngaConfigs = new BarngaOnlineConfigsDefault(world);
+        BarngaOnlineConfigsDefault barngaConfigs =
+            new BarngaOnlineConfigsFromFile(world);
 
         // Event Listeners
         server.addConnectListener(
