@@ -126,6 +126,15 @@ public interface BarngaOnlineConfigs {
     public boolean foodVisible(Player player, Food food);
 
     /**
+     * Determine whether a player can eat the given food.
+     *
+     * @param player
+     *
+     * @param food
+     */
+    public boolean foodEatable(Player player, Food food);
+
+    /**
      * Handles points-related behavior when getting food.
      *
      * @param player the player who ate the food

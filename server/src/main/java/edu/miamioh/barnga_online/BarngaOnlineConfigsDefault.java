@@ -23,6 +23,9 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     public static final int INVISIBLE = -1;
     // Just an abbreviation to make the table look nicer
     public static final int I = INVISIBLE;
+    /* Eatable? */
+    public static final int T = 1;
+    public static final int F = 0;
 
     /* Will get updated on reading configuration file */
     /* Note: These are NOT constants (even though they act like them) */
@@ -38,6 +41,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     /* Rows => self, Cols => other teams */
     protected int[][] playerVisibility;
     protected int[][] foodVisibility;
+    protected int[][] foodEatability;
 
     private int playerCounter = 0;
     private int foodCounter = 0;
@@ -71,6 +75,14 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
             {3, 3, 3, 3},   // Team 3: Everything looks the same
         };
         foodVisibility = foodVisibilityCopy;
+
+        int[][] foodEatabilityCopy = {
+            {T, F, F, F},
+            {F, T, F, F},
+            {F, F, T, F},
+            {F, F, F, T},
+        };
+        foodEatability = foodEatabilityCopy;
 
         // Food will be generated per client connection
     }
@@ -192,7 +204,16 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
             return false;
         }
 
-        return player.canSee(food);
+        return foodVisibility[player.teamId][food.team] != INVISIBLE;
+    }
+
+    @Override
+    public boolean foodEatable(Player player, Food food) {
+        if (player == null || food == null) {
+            return false;
+        }
+
+        return foodEatability[player.teamId][food.team] == T;
     }
 
     @Override
@@ -215,6 +236,10 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     public int[][] getFoodVisibility() {
         return foodVisibility;
+    }
+
+    public int[][] getFoodEatability() {
+        return foodEatability;
     }
 
     public WorldState getWorld() {

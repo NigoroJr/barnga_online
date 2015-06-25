@@ -69,7 +69,8 @@ public class Player {
 
 	public boolean canEat(Food food) {
 		double distance = Util.distance(food.coord, coord);
-		return canSee(food) && distance <= VALID_RANGE;
+        boolean eatable = configs.foodEatable(this, food);
+		return canSee(food) && eatable && distance <= VALID_RANGE;
 	}
 
     public int appearsTo(Player player) {
