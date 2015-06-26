@@ -3,7 +3,7 @@ var screenWidth = window.innerWidth;
 var screenHeight = window.innerHeight;
 
 //This starts the server side of socket.io
-var socket = io.connect('http://10.33.50.149:3000');
+var socket = io.connect('http://localhost:3000');
 
 //Team Colors
 var teamColors = ['#FF0000', '#ffff00', '#00ff00', '#0000ff'];
@@ -87,14 +87,14 @@ var gridInfo = {
 };
 
 //Variables in order to ensure that the connection is open and starts the game
-var connected = false;
+var connected = true;
 var startGame = false;
 
 //Variables to hold all of the current details about player and food
 var players = {};
 var food = {};
 // Dummy data
-var myPlayer= {id: 42, teamId: 42, coord: {x: 42, y: 42}};
+var myPlayer; // = {id: 42, teamId: 42, coord: {x: 42, y: 42}};
 
 var canvas = document.getElementById('gameCanvas');
 canvas.width = worldInfo.width;
@@ -111,11 +111,6 @@ window.addEventListener('keyup', function(e) {
   keys[e.keyCode] = false;
 }, false);
 
-/**
-  INFO
-  1. Checks if a directional key is pressed
-  2. If a directional key is pressed then it contacts the server and processes a possible move
-  */
 function playerControls() {
   var change = false;
   var tempX = myPlayer.coord.x;
@@ -151,7 +146,7 @@ function playerControls() {
 function validateMove(num) {
   switch (num) {
     case 37:
-      if (myPlayer.coord.x >= 1) {
+      if (myPlayer.coord.x >= playerInfo.size/2) {
         return true;
       }
       else {
@@ -159,7 +154,7 @@ function validateMove(num) {
       }
       break;
     case 38:
-      if (myPlayer.coord.y >= 1) {
+      if (myPlayer.coord.y >= playerInfo.size/2) {
         return true;
       }
       else {
@@ -167,7 +162,7 @@ function validateMove(num) {
       }
       break;
     case 39:
-      if (myPlayer.coord.x < worldInfo.width - playerInfo.size) {
+      if (myPlayer.coord.x < worldInfo.width - playerInfo.size/2) {
         return true;
       }
       else {
@@ -175,7 +170,7 @@ function validateMove(num) {
       }
       break;
     case 40:
-      if (myPlayer.coord.y < worldInfo.height - playerInfo.size) {
+      if (myPlayer.coord.y < worldInfo.height - playerInfo.size/2) {
         return true;
       }
       else {
@@ -213,40 +208,6 @@ function clearCanvas() {
 
 function drawGame() {
 
-/**
-  for (var i = 0; i <= worldInfo.width; i += gridInfo.width) {
-    canvasContext.beginPath();
-    canvasContext.moveTo(i, 0);
-    canvasContext.lineTo(i, worldInfo.height);
-    canvasContext.strokeStyle = 'gray';
-    canvasContext.stroke();
-  }
-  for (var i = 0; i <= worldInfo.height; i += gridInfo.height) {
-    canvasContext.beginPath();
-    canvasContext.moveTo(0, i);
-    canvasContext.lineTo(worldInfo.width, i);
-    canvasContext.strokeStyle = 'gray';
-    canvasContext.stroke();
-  }
-
-  //drawPlayer(myPlayer.coord.x, myPlayer.coord.y, myPlayer.teamId);
-
-  //TODO draw players
-  for (p in players) {
-    var player = players[p];
-    drawPlayer(player.coord.x, player.coord.y, player.teamId);
-  }
-
-  //TODO draw Food
-  //**
-  for (f in food) {
-    var fd = food[f];
-    drawFood(fd.coord.x, fd.coord.y, foodInfo.size, fd.team);
-  }
-  //*/
-
-  //clearCanvas();
-
   canvasContext.translate(bufferX - myPlayer.coord.x, bufferY - myPlayer.coord.y);
 
   for (var i = 0; i <= worldInfo.width; i += gridInfo.width) {
@@ -264,22 +225,138 @@ function drawGame() {
     canvasContext.stroke();
   }
 
-
   for (f in food) {
     var fd = food[f];
-    drawFood(fd.coord.x, fd.coord.y, foodInfo.size, fd.team);
+    drawFood(fd.coord.x , fd.coord.y, foodInfo.size, fd.team);
   }
 
   for (p in players) {
     var player = players[p];
-    drawPlayer(player.coord.x, player.coord.y, player.teamId);
+    drawPlayer(player.coord.x - playerInfo.size / 2, player.coord.y - playerInfo.size / 2, player.teamId);
   }
 
-  drawPlayer(myPlayer.coord.x, myPlayer.coord.y, myPlayer.teamId);
+  drawPlayer(myPlayer.coord.x - playerInfo.size / 2, myPlayer.coord.y - playerInfo.size / 2, myPlayer.teamId);
 
   canvasContext.setTransform(1, 0, 0, 1, 0, 0);
 
 }
+
+function toggleVisibility(id, state) {
+  document.getElementById(id).style.visibility = state;
+}
+
+//**************** SPLASH CONNECTION ANIMATION ****************
+var circleInfo = {
+  smallSize : 25,
+  largeSize : 35,
+  smallBuffer : 20,
+  largeBuffer : 25
+}
+
+var splashWidth = screenWidth - 20;
+var splashHeight = screenHeight - 20;
+
+var splashCanvas = document.getElementById('splash');
+splashCanvas.width = splashWidth;
+splashCanvas.height = splashHeight;
+
+var splashContext = splashCanvas.getContext('2d');
+
+function drawCircle(x, y, r) {
+  splashContext.beginPath();
+  splashContext.arc(x, y, r, 0, 2*Math.PI);
+  splashContext.fillStyle = '#9B30FF';
+  splashContext.fill();
+  splashContext.lineWidth = 5;
+  splashContext.strokeStyle = '#2E0854';
+  splashContext.stroke();
+}
+
+function drawMessage(mes) {
+  splashContext.font = '30pt Trebuchet MS';
+  splashContext.textAlign = 'center';
+  splashContext.fillStyle = 'black';
+  splashContext.fillText(mes, splashWidth/2, splashHeight/2);
+}
+
+function clearSplashCanvas() {
+  splashContext.clearRect(0, 0, splashCanvas.width, splashCanvas.height);
+}
+
+function drawConnectingAnimation(index) {
+  var startX = (splashWidth/2) - 152.5;
+  var startY = currentY = (splashHeight/2) + circleInfo.largeSize + 25;
+  var currentX = startX;
+
+  var i = 0;
+  while(i<5) {
+    if(i == index ){
+      drawCircle(currentX, currentY, circleInfo.largeSize);
+      currentX += 56.25 + circleInfo.smallBuffer;
+    }else{
+      drawCircle(currentX, currentY, circleInfo.smallSize);
+      currentX += 56.25 + circleInfo.smallBuffer;
+    }
+    i++;
+  }
+}
+
+function connectingSplash() {
+
+  //Stop the game canvas
+  canvas.style.display = "none";
+  toggleVisibility('scoreboard', 'hidden');
+
+  clearSplashCanvas();
+  drawMessage('Connecting to other Players');
+  drawConnectingAnimation(0);
+
+  var timer = setInterval(function() {
+    clearSplashCanvas();
+    drawMessage('Connecting to other Players');
+    spinner();
+
+    if(startGame){
+      //turn off the connecting splash canvas
+      splashCanvas.style.display = "none";
+      //turn on the game canvas
+      canvas.style.display = "";
+      //return;
+      clearInterval(timer);
+      (function animationLoop() {
+        if(connected && startGame){
+          requestAnimationFrame(animationLoop);
+        }
+        gameLoop();
+
+      })();
+    }
+
+  }, 1000);
+
+/**
+  if(startGame){
+    //turn off the connecting splash canvas
+    splashCanvas.style.display = "none";
+    //turn on the game canvas
+    canvas.style.display = "";
+    return;
+  }
+*/
+
+}
+
+var count = 1;
+var direction = 1;
+
+function spinner() {
+  drawConnectingAnimation(count);
+  count += direction;
+  if(count == 4 || count == 0) {
+    direction *= -1;
+  }
+}
+//**************** SPLASH CONNECTION ANIMATION ****************
 
 socket.on('connect', function() {
   connected = true;
@@ -297,12 +374,8 @@ socket.on('disconnect', function(MessagePlayerId) {
 
 socket.on('gameStart', function() {
   console.log('Game has started');
+  toggleVisibility('scoreboard', 'visible');
   startGame = true;
-});
-
-socket.on('gameEnd', function() {
-  console.log('Game has ended');
-  startGame = false;
 });
 
 socket.on('playerId', function(MessagePlayerId) {
@@ -315,28 +388,6 @@ socket.on('playerId', function(MessagePlayerId) {
 
 });
 
-/**
-  INFO
-  1. Updates a pre-existing player's coordinates
-  2. Updates my Player's current positioning
-  3. Adds a new player to the game if the player ID is not pre-existing
-  4. If the server sends something nonsensical then an error message is printed to the console
-
-  ASSUMPTIONS
-  1. When the server has a new player to add to the game then it sends a player with a new and unique player ID
-
-  DETAILS
-  1. At game start all of the pertinent data will be sent through this function
-
-  NOTE
-  1. The 'players' array is an associative array therefore it becomes an object and loses all of it's array properties
-  2. The first player sent when the game first starts is myPlayer
-
-  TODO
- **COMPLETED** 1. A way to check if the new player is myPlayer or just a different user and add the new player to myPlayer if it is me
- 2. If a player disconnects then player count needs to decrease
- 3. myPlayer is a part of the players array. I don't want this to be there.
- */
 socket.on('playerUpdate', function(MessagePlayerCoord) {
   var playerID = MessagePlayerCoord.player.id;
 
@@ -349,21 +400,12 @@ socket.on('playerUpdate', function(MessagePlayerCoord) {
   }
 });
 
-/**
-  INFO
-  1. Updates the food content
-  2. Removes food from the playing field
-
-  DETAILS
-  1. At game start a of the food will be sent via messages with gone == false
-  */
 socket.on('foodUpdate', function(MessageFoodCoord) {
   var f = MessageFoodCoord.food;
   var gone = MessageFoodCoord.gone;
   if (gone) {
     // Delete food from field
     delete food[f.id];
-    console.log("Deleted food %d\n", f.id);
   }
   else {
     food[f.id] = f;
@@ -375,90 +417,41 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
   }
 });
 
-socket.on('pointsUpdate', function(mes) {
-  var teamId = mes.teamId;
-  var newPoint = mes.newPoint;
+socket.on('pointsUpdate', function(teamId, newPoint) {
   document.getElementById(teamId).innerHTML = newPoint;
 });
 
+/**
 window.requestAnimationFrame = (function() {
-  return window.requestAnimationFrame       ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame    ||
+    return window.requestAnimationFrame  ||
+    window.webkitRequestAnimationFrame   ||
+    window.mozRequestAnimationFrame      ||
     function(callback) {
-      // window.setTimeout(callback, 60);
-      window.setTimeout(callback, 1000, 60);
+      window.setTimeout(callback, 1000/60);
     };
 })();
+*/
 
 (function animationLoop() {
-  requestAnimationFrame(animationLoop);
+  if(connected && startGame){
+    requestAnimationFrame(animationLoop);
+  }
   gameLoop();
 })();
 
 function gameLoop() {
 
-  // if (connected) {
-  if (startGame) {
-    clearCanvas();
-    playerControls();
-    drawGame();
+  if (connected) {
+    if (startGame) {
+      clearCanvas();
+      playerControls();
+      drawGame();
+    }else {
+      //Connecting to other players
+      connectingSplash();
+    }
+  }else {
+
   }
-  else {
-    //TODO Lost
-  }
-  // }
-  // else {
-  //     //TODO disconnected
-  // }
 
 }
-
-/**
-  GAME DETAILS
-  1. AT GAME START DATA FOR FOOD AND PLAYERS WILL ALL BE sent
-  2. THE CLIENT ONLY RECIEVES PERTINENT DATA FOR THEIR PLAYERS
-  3. NOT ALL OF THE FOOD IS SENT TO A SPECIFIC CLIENT, ONLY THE FOOD THAT THE CLIENT CAN SEE
-  4. A PLAYER OF TEAM ONE IF HE CAN SEE OTHER PLAYERS WILL ONLY SEE ONE COLOR OF PLAYER
-  */
-
-/**
-  NOTE
-  1. MOVE PLAYER BY ONE GRID AT A TIME
-  2. YOU NEED TO KEEP TRACK OF THE NUMBER OF PLAYERS
-  3. PLAYER DISCONNECTS WILL BE SENT VIA A DIFFERENT METHOD THAT ISN'T IN THE CURRENT SERVER Application
-  */
-
-/**
-  CRITICAL TODO
-  1. FOR EACH PRESS OF AN ARROW KEY THEN THE USER MOVES ONE GRID SPACE
-  2. NOT ALL OF THE FOOD IS VISIBLE AND THE FOOD THAT IS VISIBLE WILL BE OF THE SAME COLOR OR AT LEAST THE SERVER
-  3. **COMPLETED**When connecting there are always two new players.... 6/16/2015
-  4. THE GAME IS ENTIRELY RELIANT ON THERE BEING A MYPLAYER SET OTHERWISE IT WON'T DRAW ANYTHING
-  */
-
-/**
-  TODO PROBLEMS (NON-CRITICAL ERRORS)
-  1. Player can still be outside of the map if the start property is outside of the world
-  2. Player can be outside of the map if the speed is greater than one pixel
-  3. Infact player is leaving the map. Probably needs an approximate method to determine if the player will leave the map
-
-*/
-
-/**
-  CONSIDERATION TODO
-  1. Implement a checkerboard look in so that the user can tell that they are moving while they're in the middle of the map
-  2. Diagonal Movement
-  */
-
-/**
-  TODO ASK NAOKI
-  1. Can two players who can't see each other occupy one space?
-  2. CAN A PLAYER WHO IS SEEING A FOOD THAT DOES NOT ACTUALLY BELONG TO ITS TEAM BE EATEN BY THE PLAYER OR WILL IT REMAIN IN PLAY?
-  */
-
-/**
-  DON'T HAVE A CLUE WHY A DRAW METHOD ISN'T WORKING... LOOK HERE
-  1. THERE MUST BE VALUES FOR MYPLAYER
-  2. DRAWCIRCLE DRAWS FROM THE CENTER
-  */
