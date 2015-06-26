@@ -378,6 +378,17 @@ socket.on('gameStart', function() {
   startGame = true;
 });
 
+socket.on('gameEnd', function() {
+  console.log('Game has ended');
+  startGame = false;
+
+  // Reset state variables
+  players = {};
+  food = {};
+  // Dummy data
+  myPlayer= {id: 42, teamId: 42, coord: {x: 42, y: 42}};
+});
+
 socket.on('playerId', function(MessagePlayerId) {
   myPlayer = MessagePlayerId;
 

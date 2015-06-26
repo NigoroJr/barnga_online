@@ -22,17 +22,22 @@ public class WorldState {
     protected BarngaOnlineConfigsDefault configs;
 
     protected boolean gameStarted;
-    private int maxId = 0;
+    private int maxId;
 
     /**
      * Default constructor.
      */
     public WorldState() {
+        reset();
+    }
+
+    public void reset() {
         teams = new HashMap<Integer, Team<Player>>();
         foods = new HashMap<Integer, Food>();
         points = new HashMap<Integer, Points>();
         clients = new HashMap<SocketAddress, Player>();
         gameStarted = false;
+        maxId = 0;
     }
 
     /**

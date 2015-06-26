@@ -49,6 +49,8 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
         if (configs.gameEnds()) {
             Util.debug("Game ended!");
             server.getBroadcastOperations().sendEvent(Constants.EVENT_GAME_END);
+            // Reset world
+            world.reset();
         }
     }
 
