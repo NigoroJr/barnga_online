@@ -31,12 +31,13 @@ public class ConnectEventListener implements ConnectListener {
         int playerId = world.getId();
         int teamId = configs.assignTeam(playerId);
         Coordinates coord = configs.initialCoordinates(playerId, teamId);
-        Util.debug("Player ID %d connected at %s\n", playerId, coord);
 
         Player p = new Player(playerId, teamId, coord,
                 (BarngaOnlineConfigsDefault)configs);
         // Make sure to associate player with the client
         world.addPlayer(p, teamId, client);
+        Util.debug("Player ID %d connected at %s\n", playerId, coord);
+        Util.debug("We have %d players\n", world.getPlayers().size());
 
         // Add to room (for broadcasting)
         SocketIONamespace team = server.getNamespace(Integer.toString(teamId));
