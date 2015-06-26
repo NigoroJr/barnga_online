@@ -60,10 +60,10 @@ public class PlayerTest extends TestCase {
         assertTrue(p.canEat(f));
 
         f.coord.x = p.coord.x + Player.VALID_RANGE + 1;
-        assertFalse(p.canEat(f));
+        assertTrue(p.canEat(f));
 
         f.coord.x = Player.VALID_RANGE;
         f.coord.y = Player.VALID_RANGE;
-        assertFalse(p.canEat(f));
+        assertTrue(p.canEat(f));
     }
 }

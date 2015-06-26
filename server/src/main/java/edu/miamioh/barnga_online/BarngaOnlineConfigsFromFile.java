@@ -59,6 +59,7 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
 
         processTable("Visibility.player", toml, playerVisibility);
         processTable("Visibility.food_visible", toml, foodVisibility);
+        processTable("Visibility.food_eatable", toml, foodEatability);
 
         // Dump tables that were read
         if (Constants.DEBUG) {
@@ -73,6 +74,13 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
             for (int i = 0; i < TEAM_NUMBER; i++) {
                 for (int j = 0; j < TEAM_NUMBER; j++) {
                     Util.debug("%2d ", foodVisibility[i][j]);
+                }
+                Util.debug("");
+            }
+            Util.debug("Dumping Food eatability table");
+            for (int i = 0; i < TEAM_NUMBER; i++) {
+                for (int j = 0; j < TEAM_NUMBER; j++) {
+                    Util.debug("%2s ", foodEatability[i][j] == T ? "T" : "F");
                 }
                 Util.debug("");
             }
