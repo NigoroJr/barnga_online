@@ -360,6 +360,7 @@ function spinner() {
 
 socket.on('connect', function() {
   connected = true;
+  connectingSplash();
 });
 
 // When some player disconnects
@@ -448,18 +449,9 @@ window.requestAnimationFrame = (function() {
 })();
 
 function gameLoop() {
-
-  if (connected) {
-    if (startGame) {
-      clearCanvas();
-      playerControls();
-      drawGame();
-    }else {
-      //Connecting to other players
-      connectingSplash();
-    }
-  }else {
-
+  if (connected && startGame) {
+    clearCanvas();
+    playerControls();
+    drawGame();
   }
-
 }
