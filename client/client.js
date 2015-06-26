@@ -362,11 +362,6 @@ socket.on('connect', function() {
   connected = true;
 });
 
-// When losing connection to server
-socket.on('disconnect', function() {
-
-});
-
 // When some player disconnects
 socket.on('disconnect', function(MessagePlayerId) {
   console.log("Player %d has disconnected\n", MessagePlayerId.id);
