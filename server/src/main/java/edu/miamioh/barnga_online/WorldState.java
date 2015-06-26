@@ -282,7 +282,24 @@ public class WorldState {
      *         there is no such food.
      */
     public Food visibleFoodNear(Player player, double validDistance) {
-        for (Food f : foodsNear(player.coord, validDistance)) {
+        return visibleFoodNear(player, player.coord, validDistance);
+    }
+
+    /**
+     * Returns one of the visible food that are near the given player.
+     *
+     * @param player the target player
+     *
+     * @param baseCoord the coordinates to be searched around
+     *
+     * @param validDistance what's considered "near"
+     *
+     * @return one of the food that's near and visible by the player. null if
+     *         there is no such food.
+     */
+    public Food visibleFoodNear(Player player, Coordinates baseCoord,
+            double validDistance) {
+        for (Food f : foodsNear(baseCoord, validDistance)) {
             if (player.canSee(f)) {
                 return f;
             }
@@ -302,7 +319,24 @@ public class WorldState {
      *         there is no such food.
      */
     public Food eatableFoodNear(Player player, double validDistance) {
-        for (Food f : foodsNear(player.coord, validDistance)) {
+        return eatableFoodNear(player, player.coord, validDistance);
+    }
+
+    /**
+     * Returns one of the eatable food that are near the given player.
+     *
+     * @param player the target player
+     *
+     * @param baseCoord the coordinates to be searched around
+     *
+     * @param validDistance what's considered "near"
+     *
+     * @return one of the food that's eatable by and near the player. null if
+     *         there is no such food.
+     */
+    public Food eatableFoodNear(Player player, Coordinates baseCoord,
+            double validDistance) {
+        for (Food f : foodsNear(baseCoord, validDistance)) {
             if (player.canEat(f)) {
                 return f;
             }

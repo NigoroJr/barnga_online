@@ -67,10 +67,16 @@ public class Player {
         return food.seenBy().contains(targetTeam);
     }
 
+    /**
+     * Returns whether the player can eat the given food.
+     *
+     * This method does not check for the distance of the food.
+     *
+     * @param food
+     */
 	public boolean canEat(Food food) {
-		double distance = Util.distance(food.coord, coord);
         boolean eatable = configs.foodEatable(this, food);
-		return canSee(food) && eatable && distance <= VALID_RANGE;
+		return canSee(food) && eatable;
 	}
 
     public int appearsTo(Player player) {

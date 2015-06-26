@@ -190,12 +190,23 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
             return false;
         }
 
+        // Staying inside the world
         boolean outOfBounds = newCoord.x >= WORLD_X || newCoord.x < 0
             || newCoord.y >= WORLD_Y || newCoord.y < 0;
+
+        // Not bumping into anyone
         Player nearbyPlayer =
             world.visiblePlayerNear(player, newCoord, Player.VALID_RANGE);
         boolean someoneAround = nearbyPlayer != null;
-        return !outOfBounds && !someoneAround;
+
+        // Not bumping into uneatable food
+        Food visible =
+            world.visibleFoodNear(player, newCoord, Player.VALID_RANGE);
+        Food eatable =
+            world.eatableFoodNear(player, newCoord, Player.VALID_RANGE);
+        boolean nearbyUneatableFood = visible != null && eatable == null;
+
+        return !outOfBounds && !someoneAround && !nearbyUneatableFood;
     }
 
     @Override
