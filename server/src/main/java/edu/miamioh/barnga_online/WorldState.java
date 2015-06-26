@@ -272,7 +272,27 @@ public class WorldState {
     }
 
     /**
-     * Returns one of the food that are near the given player.
+     * Returns one of the visible food that are near the given player.
+     *
+     * @param player the player to be searched around
+     *
+     * @param validDistance what's considered "near"
+     *
+     * @return one of the food that's near and visible by the player. null if
+     *         there is no such food.
+     */
+    public Food visibleFoodNear(Player player, double validDistance) {
+        for (Food f : foodsNear(player.coord, validDistance)) {
+            if (player.canSee(f)) {
+                return f;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns one of the eatable food that are near the given player.
      *
      * @param player the player to be searched around
      *

@@ -89,14 +89,20 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
      * Handles the food-related response on receiving player move.
      */
     private void handleFood(Player player, Coordinates newCoord) {
-        Food food = world.eatableFoodNear(player, Player.VALID_RANGE);
+        Food food;
+        // Check for nearby food
+        food = world.visibleFoodNear(player, Player.VALID_RANGE);
+        if (food == null) {
+            return;
+        }
+        configs.bumpFoodCallback(player, food);
 
+        // Check for nearby eatable food
+        food = world.eatableFoodNear(player, Player.VALID_RANGE);
         // No food eatable
         if (food == null) {
             return;
         }
-
-        configs.bumpFoodCallback(player, food);
 
         // Note: Most likely food will be removed from world here
         configs.eatFoodCallback(player, food);

@@ -63,7 +63,9 @@ public interface BarngaOnlineConfigs {
      * Callback method when bumping into a food.
      *
      * This method does not need to do anything if there is no particular
-     * action that needs to be executed when bumping into a food.
+     * action that needs to be executed when bumping into a food. Also note
+     * that this method is called whenever a player bumps into a food,
+     * regardless of whether the player can eat it or not.
      * The check for whether the player can eat the food is done in
      * foodEatable method.
      *
