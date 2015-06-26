@@ -8,6 +8,14 @@ import java.util.HashSet;
  * @author Naoki Mizuno
  */
 public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
+    /* Invisible */
+    public static final int INVISIBLE = -1;
+    // Just an abbreviation to make the table look nicer
+    public static final int I = INVISIBLE;
+    /* Eatable? */
+    public static final int T = 1;
+    public static final int F = 0;
+
     /* Default values */
     public static final int DEFAULT_WORLD_X = 3000;
     public static final int DEFAULT_WORLD_Y = 3000;
@@ -18,14 +26,24 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     /* How many points a player gets when eating a food */
     public static final int DEFAULT_OWN_TEAM_FOOD_POINTS = 3;
     public static final int DEFAULT_OTHER_TEAM_FOOD_POINTS = 2;
-
-    /* Invisible */
-    public static final int INVISIBLE = -1;
-    // Just an abbreviation to make the table look nicer
-    public static final int I = INVISIBLE;
-    /* Eatable? */
-    public static final int T = 1;
-    public static final int F = 0;
+    public static final int[][] DEFAULT_PLAYER_VISIBILITY = {
+        {0, I, I, I},   // Team 0: Doesn't see any other team
+        {2, 1, 3, 0},   // Team 1: Sees different from actual
+        {0, 1, 2, 3},   // Team 2: Sees all other teams
+        {I, 1, I, 3},   // Team 3: Only sees some teams
+    };
+    public static final int[][] DEFAULT_FOOD_EATABILITY = {
+        {T, F, F, F},
+        {F, T, F, F},
+        {F, F, T, F},
+        {F, F, F, T},
+    };
+    public static final int[][] DEFAULT_FOOD_VISIBILITY = {
+        {0, I, 2, I},   // Team 0: Sees some of other teams' food
+        {I, 1, I, I},   // Team 1: All food of their own
+        {0, 1, 2, 3},   // Team 2: Sees food for all other teams
+        {3, 3, 3, 3},   // Team 3: Everything looks the same
+    };
 
     /* Will get updated on reading configuration file */
     /* Note: These are NOT constants (even though they act like them) */
@@ -58,33 +76,11 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
         world.setWorldSizeX(WORLD_X);
         world.setWorldSizeY(WORLD_Y);
 
-        /* Player visibility */
-        int[][] playerVisibilityCopy = {
-            {0, I, I, I},   // Team 0: Doesn't see any other team
-            {2, 1, 3, 0},   // Team 1: Sees different from actual
-            {0, 1, 2, 3},   // Team 2: Sees all other teams
-            {I, 1, I, 3},   // Team 3: Only sees some teams
-        };
-        playerVisibility = playerVisibilityCopy;
+        playerVisibility = DEFAULT_PLAYER_VISIBILITY;
+        foodVisibility = DEFAULT_FOOD_VISIBILITY;
+        foodEatability = DEFAULT_FOOD_EATABILITY;
 
-        /* Food visibility */
-        int[][] foodVisibilityCopy = {
-            {0, I, 2, I},   // Team 0: Sees some of other teams' food
-            {I, 1, I, I},   // Team 1: All food of their own
-            {0, 1, 2, 3},   // Team 2: Sees food for all other teams
-            {3, 3, 3, 3},   // Team 3: Everything looks the same
-        };
-        foodVisibility = foodVisibilityCopy;
-
-        int[][] foodEatabilityCopy = {
-            {T, F, F, F},
-            {F, T, F, F},
-            {F, F, T, F},
-            {F, F, F, T},
-        };
-        foodEatability = foodEatabilityCopy;
-
-        // Food will be generated per client connection
+        // Note: Food will be generated per client connection
     }
 
     /**
