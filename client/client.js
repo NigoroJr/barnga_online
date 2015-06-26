@@ -87,14 +87,14 @@ var gridInfo = {
 };
 
 //Variables in order to ensure that the connection is open and starts the game
-var connected = true;
+var connected = false;
 var startGame = false;
 
 //Variables to hold all of the current details about player and food
 var players = {};
 var food = {};
 // Dummy data
-var myPlayer; // = {id: 42, teamId: 42, coord: {x: 42, y: 42}};
+var myPlayer = {id: 42, teamId: 42, coord: {x: 42, y: 42}};
 
 var canvas = document.getElementById('gameCanvas');
 canvas.width = worldInfo.width;
@@ -428,8 +428,10 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
   }
 });
 
-socket.on('pointsUpdate', function(teamId, newPoint) {
-  document.getElementById(teamId).innerHTML = newPoint;
+socket.on('pointsUpdate', function(mes) {
+  var teamId = mes.teamId;
+  var newPoint = mes.newPoint;
+  document.getElementById(String(teamId)).innerHTML = newPoint;
 });
 
 /**
