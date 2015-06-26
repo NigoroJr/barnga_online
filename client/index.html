@@ -9,12 +9,12 @@
 
   <body style="overflow: hidden">
 
-    <div class = "scoreboard">
+    <div class = "scoreboard" id = "scoreboard">
 
-      <div class = "red_team"></div>
-      <div class = "yellow_team"></div>
-      <div class = "green_team"></div>
-      <div class = "blue_team"></div>
+      <div class = "red_team" id = "red"></div>
+      <div class = "yellow_team" id = "yellow"></div>
+      <div class = "green_team" id = "green"></div>
+      <div class = "blue_team" id = "blue"></div>
 
       <div class = "red_label" id = "0">0</div>
       <div class = "yellow_label" id = "1">0</div>
@@ -24,8 +24,9 @@
     </div>
 
     <canvas id = "gameCanvas"></canvas>
-    <script src = "https://cdn.socket.io/socket.io-1.3.5.js"></script>
-    <script src = "client.js"></script>
+    <canvas id = "splash"></canvas>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src = "game.js"></script>
 
   </body>
 
