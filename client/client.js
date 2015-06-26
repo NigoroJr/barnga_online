@@ -185,14 +185,15 @@ function drawPlayer(x, y, teamNum) {
   canvasContext.fillStyle = teamColors[teamNum];
   canvasContext.lineWidth = '2';
   canvasContext.strokeStyle = 'black';
-  canvasContext.rect(x, y, playerInfo.size, playerInfo.size);
-  canvasContext.fillRect(x, y, playerInfo.size, playerInfo.size);
+  var s = playerInfo.size;
+  canvasContext.rect(x - s/2, y - s/2, s, s);
+  canvasContext.fillRect(x - s/2, y - s/2, s, s);
   canvasContext.stroke();
 }
 
 function drawFood(x, y, r, teamNum) {
   canvasContext.beginPath();
-  canvasContext.arc(x, y, r, 0, 2*Math.PI);
+  canvasContext.arc(x - r, y - r, r, 0, 2*Math.PI);
   canvasContext.fillStyle = teamColors[teamNum];
   canvasContext.fill();
   canvasContext.lineWidth = 2;
