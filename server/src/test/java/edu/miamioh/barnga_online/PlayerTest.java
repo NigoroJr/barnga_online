@@ -56,14 +56,14 @@ public class PlayerTest extends TestCase {
         Food f = new Food(42, 0, foodCoord, configs);
         assertTrue(p.canEat(f));
 
-        f.coord.x = p.coord.x + Player.VALID_RANGE - 1;
+        f.coord.x = p.coord.x + configs.getGridSize() - 1;
         assertTrue(p.canEat(f));
 
-        f.coord.x = p.coord.x + Player.VALID_RANGE + 1;
+        f.coord.x = p.coord.x + configs.getGridSize() + 1;
         assertTrue(p.canEat(f));
 
-        f.coord.x = Player.VALID_RANGE;
-        f.coord.y = Player.VALID_RANGE;
+        f.coord.x = configs.getGridSize();
+        f.coord.y = configs.getGridSize();
         assertTrue(p.canEat(f));
     }
 }

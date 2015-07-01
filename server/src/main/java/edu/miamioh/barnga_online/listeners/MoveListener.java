@@ -18,11 +18,11 @@ import edu.miamioh.barnga_online.events.*;
  */
 public class MoveListener implements DataListener<MessagePlayerCoord> {
     protected WorldState world;
-    protected BarngaOnlineConfigs configs;
+    protected BarngaOnlineConfigsDefault configs;
     protected SocketIOServer server;
 
-    public MoveListener(BarngaOnlineConfigs configs, WorldState world,
-            SocketIOServer server) {
+    public MoveListener(BarngaOnlineConfigsDefault configs,
+            WorldState world, SocketIOServer server) {
         super();
 
         this.world = world;
@@ -33,7 +33,7 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
     @Override
     public void onData(SocketIOClient client, MessagePlayerCoord message,
             AckRequest req) {
-        Player player = new Player(message.player, (BarngaOnlineConfigsDefault)configs);
+        Player player = new Player(message.player, configs);
         Coordinates newCoord = message.newCoord;
 
         Util.debug("Request from Player ID %d of Team %d from %s to %s\n",
@@ -59,7 +59,7 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
      */
     private void handlePlayer(Player player, Coordinates newCoord) {
         Player otherPlayer =
-            world.visiblePlayerNear(player, Player.VALID_RANGE);
+                world.visiblePlayerNear(player, configs.getGridSize());
 
         // Someone's there
         if (otherPlayer != null) {
@@ -93,14 +93,14 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
     private void handleFood(Player player, Coordinates newCoord) {
         Food food;
         // Check for nearby food
-        food = world.visibleFoodNear(player, Player.VALID_RANGE);
+        food = world.visibleFoodNear(player, configs.getGridSize());
         if (food == null) {
             return;
         }
         configs.bumpFoodCallback(player, food);
 
         // Check for nearby eatable food
-        food = world.eatableFoodNear(player, Player.VALID_RANGE);
+        food = world.eatableFoodNear(player, configs.getGridSize());
         // No food eatable
         if (food == null) {
             return;

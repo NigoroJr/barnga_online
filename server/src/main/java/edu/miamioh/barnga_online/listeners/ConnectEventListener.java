@@ -13,11 +13,11 @@ import edu.miamioh.barnga_online.events.*;
 
 public class ConnectEventListener implements ConnectListener {
     protected WorldState world;
-    protected BarngaOnlineConfigs configs;
+    protected BarngaOnlineConfigsDefault configs;
     protected SocketIOServer server;
 
-    public ConnectEventListener(BarngaOnlineConfigs configs, WorldState world,
-            SocketIOServer server) {
+    public ConnectEventListener(BarngaOnlineConfigsDefault configs,
+            WorldState world, SocketIOServer server) {
         super();
 
         this.world = world;
@@ -52,6 +52,8 @@ public class ConnectEventListener implements ConnectListener {
             world.getPoints().put(teamId, new Points());
         }
 
+        // Tell the client about world size etc.
+        sendWorldParams(client);
         // Send player's identity
         client.sendEvent(Constants.EVENT_PLAYER_ID, new MessagePlayerId(p));
         // Generate food for player's team
@@ -147,5 +149,14 @@ public class ConnectEventListener implements ConnectListener {
 
             client.sendEvent(Constants.EVENT_POINTS_UPDATE, mes);
         }
+    }
+
+    private void sendWorldParams(SocketIOClient client) {
+        MessageWorldParams mes = new MessageWorldParams(
+                configs.getWorldSizeX(),
+                configs.getWorldSizeY(),
+                configs.getGridSize());
+
+        client.sendEvent(Constants.EVENT_WORLD_PARAMS, mes);
     }
 }

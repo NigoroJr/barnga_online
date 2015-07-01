@@ -1,3 +1,6 @@
+# Grid size of client in pixels
+grid_size = 25
+
 [World]
 # World size, in pixels
 size_x = 3000

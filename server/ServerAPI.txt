@@ -1,6 +1,6 @@
 Server API
 ==========
-Version: 1.3.1
+Version: 1.4.0
 
 Container Classes
 -----------------
@@ -44,6 +44,11 @@ MessagePointsUpdate
     player   : MessagePlayerId
     newPoint : int
 
+MessageWorldParams
+    worldSizeX : int
+    worldSizeY : int
+    gridSize   : int
+
 
 Events FROM server
 ------------------
@@ -52,6 +57,10 @@ Events FROM server
     - MessagePlayerId
 * gameStart
 * gameEnd
+
+# The information about the world.
+* worldParams
+    - MessageWorldParams
 
 # The identity of the player. This includes the starting ID, team ID, and the
 # starting coordinates of the player who received this event.

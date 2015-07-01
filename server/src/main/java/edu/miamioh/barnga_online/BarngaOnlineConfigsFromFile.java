@@ -29,6 +29,10 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
         }
 
         Long val;
+        if ((val = toml.getLong("grid_size")) != null) {
+            CLIENT_GRID_SIZE = val.intValue();
+        }
+
         if ((val = toml.getLong("World.size_x")) != null) {
             WORLD_X = val.intValue();
         }

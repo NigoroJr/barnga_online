@@ -13,6 +13,7 @@ public class Constants {
 
     /* Events sent FROM the server */
     public static final String EVENT_PLAYER_ID = "playerId";
+    public static final String EVENT_WORLD_PARAMS = "worldParams";
     public static final String EVENT_DISCONNECT = "disconnect";
     public static final String EVENT_GAME_START = "gameStart";
     public static final String EVENT_GAME_END = "gameEnd";

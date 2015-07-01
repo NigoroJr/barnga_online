@@ -396,6 +396,16 @@ socket.on('playerId', function(MessagePlayerId) {
 
 });
 
+socket.on('worldParams', function(MessageWorldParams) {
+  playerInfo.size = MessageWorldParams.gridSize;
+  gridInfo.width = MessageWorldParams.gridSize;
+  gridInfo.height = MessageWorldParams.gridSize;
+  foodInfo.size = MessageWorldParams.gridSize / 2;
+
+  worldInfo.width = MessageWorldParams.worldSizeX;
+  worldInfo.height = MessageWorldParams.worldSizeY;
+});
+
 socket.on('playerUpdate', function(MessagePlayerCoord) {
   var playerID = MessagePlayerCoord.player.id;
 

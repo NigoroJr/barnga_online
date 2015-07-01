@@ -19,6 +19,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     /* Default values */
     public static final int DEFAULT_WORLD_X = 3000;
     public static final int DEFAULT_WORLD_Y = 3000;
+    public static final int DEFAULT_GRID_SIZE = 25;
     /* Used when assigning team */
     public static final int DEFAULT_TEAM_NUMBER = 4;
     public static final int DEFAULT_FOOD_PER_PLAYER = 10;
@@ -49,6 +50,8 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     /* Note: These are NOT constants (even though they act like them) */
     protected int WORLD_X = DEFAULT_WORLD_X;
     protected int WORLD_Y = DEFAULT_WORLD_Y;
+    /* Grid size of clients */
+    protected int CLIENT_GRID_SIZE = DEFAULT_GRID_SIZE;
     protected int TEAM_NUMBER = DEFAULT_TEAM_NUMBER;
     protected int FOOD_PER_PLAYER = DEFAULT_FOOD_PER_PLAYER;
     protected int MAXIMUM_FOOD_PER_TEAM = DEFAULT_MAXIMUM_FOOD_PER_TEAM;
@@ -192,14 +195,14 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
         // Not bumping into anyone
         Player nearbyPlayer =
-            world.visiblePlayerNear(player, newCoord, Player.VALID_RANGE);
+                world.visiblePlayerNear(player, newCoord, CLIENT_GRID_SIZE);
         boolean someoneAround = nearbyPlayer != null;
 
         // Not bumping into uneatable food
         Food visible =
-            world.visibleFoodNear(player, newCoord, Player.VALID_RANGE);
+                world.visibleFoodNear(player, newCoord, CLIENT_GRID_SIZE);
         Food eatable =
-            world.eatableFoodNear(player, newCoord, Player.VALID_RANGE);
+                world.eatableFoodNear(player, newCoord, CLIENT_GRID_SIZE);
         boolean nearbyUneatableFood = visible != null && eatable == null;
 
         return !outOfBounds && !someoneAround && !nearbyUneatableFood;
@@ -251,5 +254,17 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     public WorldState getWorld() {
         return world;
+    }
+
+    public int getWorldSizeX() {
+        return WORLD_X;
+    }
+
+    public int getWorldSizeY() {
+        return WORLD_Y;
+    }
+
+    public int getGridSize() {
+        return CLIENT_GRID_SIZE;
     }
 }

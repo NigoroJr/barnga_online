@@ -10,9 +10,6 @@ import edu.miamioh.barnga_online.events.MessagePlayerId;
  * @author Naoki Mizuno
  */
 public class Player {
-    /* Accepted distance from food for eating in pixels */
-    public static final int VALID_RANGE = 25;
-
     /* Hash code of the MessagePlayerName#playerName */
     public int id;
     public int teamId;
