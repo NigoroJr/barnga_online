@@ -8,8 +8,17 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
 
-import edu.miamioh.barnga_online.*;
-import edu.miamioh.barnga_online.events.*;
+import edu.miamioh.barnga_online.BarngaOnlineConfigsDefault;
+import edu.miamioh.barnga_online.Constants;
+import edu.miamioh.barnga_online.Coordinates;
+import edu.miamioh.barnga_online.Food;
+import edu.miamioh.barnga_online.Player;
+import edu.miamioh.barnga_online.Team;
+import edu.miamioh.barnga_online.Util;
+import edu.miamioh.barnga_online.WorldState;
+import edu.miamioh.barnga_online.events.MessageFoodCoord;
+import edu.miamioh.barnga_online.events.MessagePlayerCoord;
+import edu.miamioh.barnga_online.events.MessagePointsUpdate;
 
 /**
  * Listeners for when receiving the EVENT_MOVE event.
