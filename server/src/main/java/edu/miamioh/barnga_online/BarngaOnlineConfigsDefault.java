@@ -27,6 +27,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     /* How many points a player gets when eating a food */
     public static final int DEFAULT_OWN_TEAM_FOOD_POINTS = 3;
     public static final int DEFAULT_OTHER_TEAM_FOOD_POINTS = 2;
+    public static final int DEFAULT_FOOD_REGENERATION = 0;
     public static final int[][] DEFAULT_PLAYER_VISIBILITY = {
         {0, I, I, I},   // Team 0: Doesn't see any other team
         {2, 1, 3, 0},   // Team 1: Sees different from actual
@@ -57,6 +58,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     protected int MAXIMUM_FOOD_PER_TEAM = DEFAULT_MAXIMUM_FOOD_PER_TEAM;
     protected int OWN_TEAM_FOOD_POINTS = DEFAULT_OWN_TEAM_FOOD_POINTS;
     protected int OTHER_TEAM_FOOD_POINTS = DEFAULT_OTHER_TEAM_FOOD_POINTS;
+    protected int FOOD_REGENERATION = DEFAULT_FOOD_REGENERATION;
 
     protected WorldState world;
     /* Rows => self, Cols => other teams */
@@ -179,8 +181,20 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     @Override
     public HashSet<Food> generateFood(Player player, Food food) {
-        // Do nothing
-        return null;
+        HashSet<Food> ret = new HashSet<Food>();
+
+        int teamId = player.teamId;
+        for (int i = 0; i < FOOD_REGENERATION; i++) {
+            int x = (int)(Math.random() * WORLD_X);
+            int y = (int)(Math.random() * WORLD_Y);
+            Coordinates coord = new Coordinates(x, y);
+            Food f = new Food(foodCounter++, teamId, coord, this);
+            world.addFood(f);
+
+            ret.add(f);
+        }
+
+        return ret;
     }
 
     @Override

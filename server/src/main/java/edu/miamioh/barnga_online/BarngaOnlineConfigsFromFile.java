@@ -60,6 +60,10 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
             OTHER_TEAM_FOOD_POINTS = val.intValue();
         }
 
+        if ((val = toml.getLong("World.food_regeneration")) != null) {
+            FOOD_REGENERATION = val.intValue();
+        }
+
         processTable("Visibility.player", toml, playerVisibility);
         processTable("Visibility.food_visible", toml, foodVisibility);
         processTable("Visibility.food_eatable", toml, foodEatability);

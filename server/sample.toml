@@ -13,6 +13,7 @@ maximum_food_per_team = 100
 own_team_food_points = 3
 # Points you get when collecting other teams' food
 other_team_food_points = 1
+food_regeneration = 0
 
 [Visibility]
 # Rows are self, columns are others (self looking at other)
