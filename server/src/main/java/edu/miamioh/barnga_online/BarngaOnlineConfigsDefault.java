@@ -24,6 +24,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     public static final int DEFAULT_TEAM_NUMBER = 4;
     public static final int DEFAULT_FOOD_PER_PLAYER = 10;
     public static final int DEFAULT_MAXIMUM_FOOD_PER_TEAM = 100;
+    public static final int DEFAULT_MAXIMUM_POINTS = 100;
     /* How many points a player gets when eating a food */
     public static final int DEFAULT_OWN_TEAM_FOOD_POINTS = 3;
     public static final int DEFAULT_OTHER_TEAM_FOOD_POINTS = 2;
@@ -59,6 +60,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     protected int OWN_TEAM_FOOD_POINTS = DEFAULT_OWN_TEAM_FOOD_POINTS;
     protected int OTHER_TEAM_FOOD_POINTS = DEFAULT_OTHER_TEAM_FOOD_POINTS;
     protected int FOOD_REGENERATION = DEFAULT_FOOD_REGENERATION;
+    protected int MAXIUMUM_POINTS = DEFAULT_MAXIMUM_POINTS;
 
     protected WorldState world;
     /* Rows => self, Cols => other teams */
@@ -112,6 +114,12 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     @Override
     public boolean gameEnds() {
+        for (Points p : world.getPoints().values()) {
+            if (MAXIUMUM_POINTS > 0 && p.getTotal() > MAXIUMUM_POINTS) {
+                return true;
+            }
+        }
+
         // Finish game when all foods are taken
         boolean[] ateAll = new boolean[TEAM_NUMBER];
         for (int i = 0; i < ateAll.length; i++) {

@@ -64,6 +64,10 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
             FOOD_REGENERATION = val.intValue();
         }
 
+        if ((val = toml.getLong("World.maximum_points")) != null) {
+            MAXIUMUM_POINTS = val.intValue();
+        }
+
         processTable("Visibility.player", toml, playerVisibility);
         processTable("Visibility.food_visible", toml, foodVisibility);
         processTable("Visibility.food_eatable", toml, foodEatability);

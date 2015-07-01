@@ -8,6 +8,9 @@ size_y = 3000
 # Number of teams
 teams = 4
 food_per_player = 10
+# Collect this many points to win the game
+# Put a non-positive number to disable this
+maximum_points = 200
 maximum_food_per_team = 100
 # Points you get when collecting your own team's food
 own_team_food_points = 3
