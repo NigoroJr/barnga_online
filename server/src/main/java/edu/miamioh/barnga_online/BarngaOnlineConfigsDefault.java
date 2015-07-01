@@ -185,6 +185,10 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
         int teamId = player.teamId;
         for (int i = 0; i < FOOD_REGENERATION; i++) {
+            if (world.getFoods().size() > MAXIMUM_FOOD_PER_TEAM) {
+                break;
+            }
+
             int x = (int)(Math.random() * WORLD_X);
             int y = (int)(Math.random() * WORLD_Y);
             Coordinates coord = new Coordinates(x, y);
