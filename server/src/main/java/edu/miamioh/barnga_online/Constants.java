@@ -8,8 +8,16 @@ public class Constants {
 
     public static final String SERVER_QUIT = "q";
 
-    public static final String HOSTNAME = "10.33.50.149";
+    public static final String CONF_FILE = "barnga.conf";
+
+    /* Keys for the conf file */
+    public static final String CONF_HOSTNAME = "server_host";
+    public static final String CONF_PORT = "server_port";
+    public static final String CONF_RULES = "rules";
+
+    public static final String HOSTNAME = "localhost";
     public static final int PORT = 3000;
+    public static final String SAMPLE_RULES = "sample.toml";
 
     /* Events sent FROM the server */
     public static final String EVENT_PLAYER_ID = "playerId";

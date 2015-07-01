@@ -1,5 +1,7 @@
 package edu.miamioh.barnga_online;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import com.corundumstudio.socketio.Configuration;
@@ -18,10 +20,16 @@ import edu.miamioh.barnga_online.listeners.MoveListener;
  * @author Naoki Mizuno
  */
 public class Main {
+    protected static String hostName = Constants.HOSTNAME;
+    protected static int port = Constants.PORT;
+    protected static String rulesFileName = Constants.SAMPLE_RULES;
+
     public static void main(String[] args) {
+        readConf(Constants.CONF_FILE);
+
         Configuration config = new Configuration();
-        config.setHostname(Constants.HOSTNAME);
-        config.setPort(Constants.PORT);
+        config.setHostname(hostName);
+        config.setPort(port);
 
         SocketIOServer server = new SocketIOServer(config);
         server.start();
@@ -30,7 +38,7 @@ public class Main {
         // Game setup
         WorldState world = new WorldState();
         BarngaOnlineConfigsDefault barngaConfigs =
-            new BarngaOnlineConfigsFromFile(world);
+            new BarngaOnlineConfigsFromFile(world, rulesFileName);
 
         // Event Listeners
         server.addConnectListener(
@@ -52,5 +60,38 @@ public class Main {
         Util.debug("Stopping Server");
         server.stop();
         Util.debug("Server has stopped");
+    }
+
+    public static void readConf(String confFile) {
+        Scanner scn;
+        try {
+            scn = new Scanner(new File(confFile));
+        }
+        catch (FileNotFoundException e) {
+            System.err.println("Could not find rules file");
+            System.err.println("Using default configuration values");
+            return;
+        }
+
+        while (scn.hasNextLine()) {
+            String line = scn.nextLine();
+            String[] tokens = line.split(":", 2);
+
+            // Strip off whitespaces
+            String k = tokens[0].trim();
+            String v = tokens[1].trim();
+
+            if (k.equals(Constants.CONF_HOSTNAME)) {
+                hostName = v;
+            }
+            else if (k.equals(Constants.CONF_PORT)) {
+                port = Integer.parseInt(v);
+            }
+            else if (k.equals(Constants.CONF_RULES)) {
+                rulesFileName = v;
+            }
+        }
+
+        scn.close();
     }
 }

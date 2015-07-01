@@ -6,13 +6,12 @@ import java.util.List;
 import com.moandjiezana.toml.Toml;
 
 public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
-    public static final String FILENAME = "sample.toml";
     protected Toml toml;
 
-    public BarngaOnlineConfigsFromFile(WorldState world) {
+    public BarngaOnlineConfigsFromFile(WorldState world, String fileName) {
         super(world);
 
-        readFile(FILENAME);
+        readFile(fileName);
     }
 
     public void readFile(String filename) {
