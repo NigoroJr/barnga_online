@@ -10,9 +10,9 @@ require 'optparse'
 
 def generate(teams, self_safe: true, tolerance: 0)
   res = []
-  0.upto(teams - 1) do
+  teams.times do
     res << []
-    0.upto(teams - 1) do |j|
+    teams.times do |j|
       num = rand(teams + tolerance) - 1
       num = j if num >= teams
       res.last << num
@@ -20,7 +20,7 @@ def generate(teams, self_safe: true, tolerance: 0)
   end
 
   if self_safe
-    0.upto(teams - 1) do |i|
+    teams.times do |i|
       res[i][i] = i
     end
   end
@@ -30,17 +30,17 @@ end
 
 def generate_eatability(teams, self_safe)
   res = []
-  1.upto(teams) do
+  teams.times do
     res << []
-    1.upto(teams) do
-      # Random number between 0 and 1
+    teams.times do
+      # 0 or 1
       num = rand(2)
       res.last << num
     end
   end
 
   if self_safe
-    0.upto(teams - 1) do |i|
+   teams.times do |i|
       res[i][i] = 1
     end
   end
