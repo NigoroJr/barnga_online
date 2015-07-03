@@ -42,6 +42,9 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
 
         if ((val = toml.getLong("World.teams")) != null) {
             TEAM_NUMBER = val.intValue();
+            playerVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
+            foodVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
+            foodEatability = new int[TEAM_NUMBER][TEAM_NUMBER];
         }
 
         if ((val = toml.getLong("World.food_per_player")) != null) {
