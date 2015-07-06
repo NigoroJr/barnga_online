@@ -238,7 +238,11 @@ function drawGame() {
 
   for (f in food) {
     var fd = food[f];
-    drawFood(fd.coord.x , fd.coord.y, foodInfo.size, fd.team);
+    // Don't draw anything beyond screen
+    if (Math.abs(myPlayer.coord.x - fd.coord.x) <= window.innerWidth / 2 + window.innerWidth * 0.1
+        && Math.abs(myPlayer.coord.y - fd.coord.y) <= window.innerHeight / 2 + window.innerHeight * 0.1) {
+      drawFood(fd.coord.x , fd.coord.y, foodInfo.size, fd.team);
+    }
   }
 
   for (p in players) {
