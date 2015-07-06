@@ -441,11 +441,6 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
   }
   else {
     food[f.id] = f;
-    console.log("Added food %d at (%d, %d): %o\n",
-        food[f.id].id,
-        food[f.id].coord.x,
-        food[f.id].coord.y,
-        food[f.id]);
   }
 });
 
