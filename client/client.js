@@ -211,14 +211,24 @@ function drawGame() {
 
   canvasContext.translate(bufferX - myPlayer.coord.x, bufferY - myPlayer.coord.y);
 
-  for (var i = 0; i <= worldInfo.width; i += gridInfo.width) {
+  var startX, startY, endX, endY;
+  startX = myPlayer.coord.x - (myPlayer.coord.x % gridInfo.width) - bufferX;
+  startY = myPlayer.coord.y - (myPlayer.coord.y % gridInfo.height) - bufferY;
+  if(startX<0){startX=0;}
+  if(startY<0){startY=0;}
+  endX = startX + (bufferX*2) + 100;
+  endY = startY + (bufferY*2) + 100;
+  if(endX>worldInfo.width){endX=worldInfo.width;}
+  if(endY>worldInfo.height){endY=worldInfo.height;}
+
+  for (var i = startX; i <= endX; i += gridInfo.width) {
     canvasContext.beginPath();
     canvasContext.moveTo(i, 0);
     canvasContext.lineTo(i, worldInfo.height);
     canvasContext.strokeStyle = 'gray';
     canvasContext.stroke();
   }
-  for (var i = 0; i <= worldInfo.height; i += gridInfo.height) {
+  for (var i = startY; i <= endY; i += gridInfo.height) {
     canvasContext.beginPath();
     canvasContext.moveTo(0, i);
     canvasContext.lineTo(worldInfo.width, i);
