@@ -86,13 +86,36 @@ var gridInfo = {
   height : 25
 };
 
+// Separate food into tiles
+var foodTileInfo = {
+  width: Math.ceil(screenWidth / 2),
+  height: Math.ceil(screenHeight / 2),
+};
+
 //Variables in order to ensure that the connection is open and starts the game
 var connected = false;
 var startGame = false;
 
+function initFood(food) {
+  for (var i = 0; i < worldInfo.height / foodTileInfo.height; i++) {
+    food[i] = [];
+    for (var j = 0; j < worldInfo.width / foodTileInfo.width; j++) {
+      food[i][j] = {};
+    }
+  }
+}
+
+/* Returns the hash of a tile that the given coordinates belong to */
+function getTile(x, y) {
+  var tileX = Math.floor(x / foodTileInfo.width);
+  var tileY = Math.floor(y / foodTileInfo.height);
+  return food[tileY][tileX];
+}
+
 //Variables to hold all of the current details about player and food
 var players = {};
-var food = {};
+var food = [];
+initFood(food);
 // Dummy data
 var myPlayer = {id: 42, teamId: 42, coord: {x: 42, y: 42}};
 
@@ -211,14 +234,24 @@ function drawGame() {
 
   canvasContext.translate(bufferX - myPlayer.coord.x, bufferY - myPlayer.coord.y);
 
-  for (var i = 0; i <= worldInfo.width; i += gridInfo.width) {
+  var startX, startY, endX, endY;
+  startX = myPlayer.coord.x - (myPlayer.coord.x % gridInfo.width) - bufferX;
+  startY = myPlayer.coord.y - (myPlayer.coord.y % gridInfo.height) - bufferY;
+  if(startX<0){startX=0;}
+  if(startY<0){startY=0;}
+  endX = startX + (bufferX*2) + 100;
+  endY = startY + (bufferY*2) + 100;
+  if(endX>worldInfo.width){endX=worldInfo.width;}
+  if(endY>worldInfo.height){endY=worldInfo.height;}
+
+  for (var i = startX; i <= endX; i += gridInfo.width) {
     canvasContext.beginPath();
     canvasContext.moveTo(i, 0);
     canvasContext.lineTo(i, worldInfo.height);
     canvasContext.strokeStyle = 'gray';
     canvasContext.stroke();
   }
-  for (var i = 0; i <= worldInfo.height; i += gridInfo.height) {
+  for (var i = startY; i <= endY; i += gridInfo.height) {
     canvasContext.beginPath();
     canvasContext.moveTo(0, i);
     canvasContext.lineTo(worldInfo.width, i);
@@ -226,10 +259,34 @@ function drawGame() {
     canvasContext.stroke();
   }
 
-  for (f in food) {
-    var fd = food[f];
-    drawFood(fd.coord.x , fd.coord.y, foodInfo.size, fd.team);
+  var currentTile = {
+    x: Math.floor(myPlayer.coord.x / foodTileInfo.width),
+    y: Math.floor(myPlayer.coord.y / foodTileInfo.height)
   }
+  var vecX = [-1, 0, 1];
+  var vecY = [-1, 0, 1];
+  var concatFood = {};
+  for (i of vecX) {
+    for (j of vecY) {
+      var tileX = currentTile.x + i;
+      var tileY = currentTile.y + j;
+      if (typeof food[tileY] === 'undefined'
+          || typeof food[tileY][tileX] === 'undefined') {
+        continue;
+      }
+      var tileFood = food[tileY][tileX];
+      concatFood = $.extend({}, concatFood, tileFood);
+    }
+  }
+
+  // Use this if you want to know how many food it rendered
+  //var ctr = 0;
+  for (f in concatFood) {
+    var fd = concatFood[f];
+    drawFood(fd.coord.x , fd.coord.y, foodInfo.size, fd.team);
+    //ctr++;
+  }
+  //console.log("Rendered %d food\n", ctr);
 
   for (p in players) {
     var player = players[p];
@@ -381,7 +438,7 @@ socket.on('gameEnd', function() {
 
   // Reset state variables
   players = {};
-  food = {};
+  initFood(food);
   // Dummy data
   myPlayer= {id: 42, teamId: 42, coord: {x: 42, y: 42}};
 });
@@ -404,6 +461,7 @@ socket.on('worldParams', function(MessageWorldParams) {
 
   worldInfo.width = MessageWorldParams.worldSizeX;
   worldInfo.height = MessageWorldParams.worldSizeY;
+  initFood(food);
 });
 
 socket.on('playerUpdate', function(MessagePlayerCoord) {
@@ -423,15 +481,10 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
   var gone = MessageFoodCoord.gone;
   if (gone) {
     // Delete food from field
-    delete food[f.id];
+    delete getTile(f.coord.x, f.coord.y)[f.id];
   }
   else {
-    food[f.id] = f;
-    console.log("Added food %d at (%d, %d): %o\n",
-        food[f.id].id,
-        food[f.id].coord.x,
-        food[f.id].coord.y,
-        food[f.id]);
+    getTile(f.coord.x, f.coord.y)[f.id] = f;
   }
 });
 
