@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online.events;
+package edu.miamioh.culturecode.events;
 
 /**
  * Container class for the player's name and the belonging team.

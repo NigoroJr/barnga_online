@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.util.HashSet;
 
@@ -8,7 +8,7 @@ import java.util.HashSet;
  *
  * @author Naoki Mizuno
  */
-public interface BarngaOnlineConfigs {
+public interface CulturecodeConfigs {
     /**
      * Sets the initial coordinate of the player.
      *

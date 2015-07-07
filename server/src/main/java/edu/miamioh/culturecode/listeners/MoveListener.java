@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online.listeners;
+package edu.miamioh.culturecode.listeners;
 
 import java.util.HashSet;
 
@@ -8,17 +8,17 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
 
-import edu.miamioh.barnga_online.BarngaOnlineConfigsDefault;
-import edu.miamioh.barnga_online.Constants;
-import edu.miamioh.barnga_online.Coordinates;
-import edu.miamioh.barnga_online.Food;
-import edu.miamioh.barnga_online.Player;
-import edu.miamioh.barnga_online.Team;
-import edu.miamioh.barnga_online.Util;
-import edu.miamioh.barnga_online.WorldState;
-import edu.miamioh.barnga_online.events.MessageFoodCoord;
-import edu.miamioh.barnga_online.events.MessagePlayerCoord;
-import edu.miamioh.barnga_online.events.MessagePointsUpdate;
+import edu.miamioh.culturecode.CulturecodeConfigsDefault;
+import edu.miamioh.culturecode.Constants;
+import edu.miamioh.culturecode.Coordinates;
+import edu.miamioh.culturecode.Food;
+import edu.miamioh.culturecode.Player;
+import edu.miamioh.culturecode.Team;
+import edu.miamioh.culturecode.Util;
+import edu.miamioh.culturecode.WorldState;
+import edu.miamioh.culturecode.events.MessageFoodCoord;
+import edu.miamioh.culturecode.events.MessagePlayerCoord;
+import edu.miamioh.culturecode.events.MessagePointsUpdate;
 
 /**
  * Listeners for when receiving the EVENT_MOVE event.
@@ -27,10 +27,10 @@ import edu.miamioh.barnga_online.events.MessagePointsUpdate;
  */
 public class MoveListener implements DataListener<MessagePlayerCoord> {
     protected WorldState world;
-    protected BarngaOnlineConfigsDefault configs;
+    protected CulturecodeConfigsDefault configs;
     protected SocketIOServer server;
 
-    public MoveListener(BarngaOnlineConfigsDefault configs,
+    public MoveListener(CulturecodeConfigsDefault configs,
             WorldState world, SocketIOServer server) {
         super();
 

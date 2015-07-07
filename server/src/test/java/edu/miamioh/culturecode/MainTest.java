@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,10 +1,17 @@
-package edu.miamioh.barnga_online.listeners;
+package edu.miamioh.culturecode.listeners;
 
-import edu.miamioh.barnga_online.*;
-import edu.miamioh.barnga_online.events.*;
+import com.corundumstudio.socketio.BroadcastOperations;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.listener.DisconnectListener;
 
-import com.corundumstudio.socketio.*;
-import com.corundumstudio.socketio.listener.*;
+import edu.miamioh.culturecode.Constants;
+import edu.miamioh.culturecode.CulturecodeConfigs;
+import edu.miamioh.culturecode.Player;
+import edu.miamioh.culturecode.Team;
+import edu.miamioh.culturecode.Util;
+import edu.miamioh.culturecode.WorldState;
+import edu.miamioh.culturecode.events.MessagePlayerId;
 
 /**
  * Listeners for when receiving the EVENT_DISCONNECT event.
@@ -13,10 +20,11 @@ import com.corundumstudio.socketio.listener.*;
  */
 public class DisconnectEventListener implements DisconnectListener {
     protected WorldState world;
-    protected BarngaOnlineConfigs configs;
+    protected CulturecodeConfigs configs;
     protected SocketIOServer server;
 
-    public DisconnectEventListener(BarngaOnlineConfigs configs, WorldState world,
+    public DisconnectEventListener(CulturecodeConfigs configs,
+            WorldState world,
             SocketIOServer server) {
         super();
 

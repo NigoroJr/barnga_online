@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -6,10 +6,10 @@ import junit.framework.TestSuite;
 
 
 public class FoodTest extends TestCase {
-    public static final int I = BarngaOnlineConfigsDefault.INVISIBLE;
+    public static final int I = CulturecodeConfigsDefault.INVISIBLE;
 
     private WorldState world = new WorldState();
-    private BarngaOnlineConfigsDefault configs = new BarngaOnlineConfigsDefault(world);
+    private CulturecodeConfigsDefault configs = new CulturecodeConfigsDefault(world);
 
     public FoodTest(String testName) {
         super(testName);

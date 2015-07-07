@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.net.SocketAddress;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class WorldState {
     /* Associates SocketIOClient to Player */
     protected HashMap<SocketAddress, Player> clients;
 
-    protected BarngaOnlineConfigsDefault configs;
+    protected CulturecodeConfigsDefault configs;
 
     protected boolean gameStarted;
     private int maxId;

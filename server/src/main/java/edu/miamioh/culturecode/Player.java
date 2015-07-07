@@ -1,8 +1,8 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.util.HashSet;
 
-import edu.miamioh.barnga_online.events.MessagePlayerId;
+import edu.miamioh.culturecode.events.MessagePlayerId;
 
 /**
  *  Container class for player information.
@@ -16,7 +16,7 @@ public class Player {
     /* Current coordinate */
     public Coordinates coord;
 
-    protected BarngaOnlineConfigsDefault configs = null;
+    protected CulturecodeConfigsDefault configs = null;
 
     public Player() {
     }
@@ -28,12 +28,12 @@ public class Player {
     }
 
     public Player(int id, int teamId, Coordinates coord,
-            BarngaOnlineConfigsDefault configs) {
+            CulturecodeConfigsDefault configs) {
         this(id, teamId, coord);
         this.configs = configs;
     }
 
-    public Player(MessagePlayerId mes, BarngaOnlineConfigsDefault configs) {
+    public Player(MessagePlayerId mes, CulturecodeConfigsDefault configs) {
         this(mes.id, mes.teamId, mes.coord, configs);
     }
 
@@ -103,7 +103,7 @@ public class Player {
         for (int i = 0; i < playerVisibility.length; i++) {
             // Can see team (but may not appear as that team)
             if (playerVisibility[i][teamId] !=
-                    BarngaOnlineConfigsDefault.INVISIBLE) {
+                    CulturecodeConfigsDefault.INVISIBLE) {
                 ret.add(configs.getWorld().getTeam(i));
             }
         }
@@ -121,7 +121,7 @@ public class Player {
         for (int i = 0; i < playerVisibility.length; i++) {
             // Can see team (but may not appear as that team)
             if (playerVisibility[teamId][i] !=
-                    BarngaOnlineConfigsDefault.INVISIBLE) {
+                    CulturecodeConfigsDefault.INVISIBLE) {
                 ret.add(configs.getWorld().getTeam(i));
             }
         }
@@ -129,7 +129,7 @@ public class Player {
         return ret;
     }
 
-    public BarngaOnlineConfigsDefault getConfigs() {
+    public CulturecodeConfigsDefault getConfigs() {
         return configs;
     }
 

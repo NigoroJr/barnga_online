@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -7,13 +7,13 @@ import junit.framework.TestSuite;
 
 public class PlayerTest extends TestCase {
     private WorldState world;
-    private BarngaOnlineConfigsDefault configs;
+    private CulturecodeConfigsDefault configs;
 
     public PlayerTest(String testName) {
         super(testName);
 
         world = new WorldState();
-        configs = new BarngaOnlineConfigsDefault(world);
+        configs = new CulturecodeConfigsDefault(world);
     }
 
     public static Test suite() {
@@ -27,22 +27,22 @@ public class PlayerTest extends TestCase {
         assertTrue(p.appearsTo(0) == 0);
         assertTrue(p.appearsTo(1) == 2);
         assertTrue(p.appearsTo(2) == 0);
-        assertTrue(p.appearsTo(3) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(p.appearsTo(3) == CulturecodeConfigsDefault.INVISIBLE);
 
         p = new Player(42, 1, new Coordinates(42, 42), configs);
-        assertTrue(p.appearsTo(0) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(p.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(p.appearsTo(1) == 1);
         assertTrue(p.appearsTo(2) == 1);
         assertTrue(p.appearsTo(3) == 1);
 
         p = new Player(42, 2, new Coordinates(42, 42), configs);
-        assertTrue(p.appearsTo(0) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(p.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(p.appearsTo(1) == 3);
         assertTrue(p.appearsTo(2) == 2);
-        assertTrue(p.appearsTo(3) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(p.appearsTo(3) == CulturecodeConfigsDefault.INVISIBLE);
 
         p = new Player(42, 3, new Coordinates(42, 42), configs);
-        assertTrue(p.appearsTo(0) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(p.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(p.appearsTo(1) == 0);
         assertTrue(p.appearsTo(2) == 3);
         assertTrue(p.appearsTo(3) == 3);

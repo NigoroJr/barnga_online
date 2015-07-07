@@ -1,14 +1,14 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.io.File;
 import java.util.List;
 
 import com.moandjiezana.toml.Toml;
 
-public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
+public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
     protected Toml toml;
 
-    public BarngaOnlineConfigsFromFile(WorldState world, String fileName) {
+    public CulturecodeConfigsFromFile(WorldState world, String fileName) {
         super(world);
 
         readFile(fileName);

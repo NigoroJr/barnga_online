@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.util.HashSet;
 
@@ -7,7 +7,7 @@ import java.util.HashSet;
  *
  * @author Naoki Mizuno
  */
-public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
+public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     /* Invisible */
     public static final int INVISIBLE = -1;
     // Just an abbreviation to make the table look nicer
@@ -72,7 +72,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     private int playerCounter = 0;
     private int foodCounter = 0;
 
-    BarngaOnlineConfigsDefault(WorldState world) {
+    public CulturecodeConfigsDefault(WorldState world) {
         this.world = world;
         this.playerVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
         this.foodVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];

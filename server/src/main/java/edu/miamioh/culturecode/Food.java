@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.util.HashSet;
 
@@ -14,7 +14,7 @@ public class Food {
     /* Current coordinates */
     public Coordinates coord;
 
-    protected BarngaOnlineConfigsDefault configs = null;
+    protected CulturecodeConfigsDefault configs = null;
 
     public Food() {
     }
@@ -34,7 +34,7 @@ public class Food {
     }
 
     public Food(int id, int team, Coordinates coord,
-            BarngaOnlineConfigsDefault configs) {
+            CulturecodeConfigsDefault configs) {
         this(id, team, coord);
         this.configs = configs;
     }
@@ -49,7 +49,7 @@ public class Food {
         for (int i = 0; i < foodVisibility.length; i++) {
             // Can see food (but may not appear as that team's food)
             if (foodVisibility[i][team] !=
-                    BarngaOnlineConfigsDefault.INVISIBLE) {
+                    CulturecodeConfigsDefault.INVISIBLE) {
                 ret.add(configs.getWorld().getTeam(i));
             }
         }

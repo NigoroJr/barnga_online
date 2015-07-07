@@ -1,6 +1,6 @@
-package edu.miamioh.barnga_online.events;
+package edu.miamioh.culturecode.events;
 
-import edu.miamioh.barnga_online.Player;
+import edu.miamioh.culturecode.Player;
 
 /**
  * Container class used when sending points update to client.

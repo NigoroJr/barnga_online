@@ -1,7 +1,7 @@
-package edu.miamioh.barnga_online.events;
+package edu.miamioh.culturecode.events;
 
-import edu.miamioh.barnga_online.Coordinates;
-import edu.miamioh.barnga_online.Food;
+import edu.miamioh.culturecode.Coordinates;
+import edu.miamioh.culturecode.Food;
 
 /**
  * Container class for representing a player on the field.

@@ -1,7 +1,7 @@
-package edu.miamioh.barnga_online.events;
+package edu.miamioh.culturecode.events;
 
-import edu.miamioh.barnga_online.Player;
-import edu.miamioh.barnga_online.Coordinates;
+import edu.miamioh.culturecode.Coordinates;
+import edu.miamioh.culturecode.Player;
 
 /**
  * Container class for telling a newly connected user its identity such as ID,

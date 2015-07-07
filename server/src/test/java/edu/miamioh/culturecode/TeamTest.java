@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 
 public class TeamTest extends TestCase {
     WorldState world = new WorldState();
-    BarngaOnlineConfigsDefault configs = new BarngaOnlineConfigsDefault(world);
+    CulturecodeConfigsDefault configs = new CulturecodeConfigsDefault(world);
 
     public TeamTest(String testName) {
         super(testName);
@@ -24,22 +24,22 @@ public class TeamTest extends TestCase {
         assertTrue(t.appearsTo(0) == 0);
         assertTrue(t.appearsTo(1) == 2);
         assertTrue(t.appearsTo(2) == 0);
-        assertTrue(t.appearsTo(3) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(t.appearsTo(3) == CulturecodeConfigsDefault.INVISIBLE);
 
         t = new Team<Player>(1, configs);
-        assertTrue(t.appearsTo(0) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(t.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(t.appearsTo(1) == 1);
         assertTrue(t.appearsTo(2) == 1);
         assertTrue(t.appearsTo(3) == 1);
 
         t = new Team<Player>(2, configs);
-        assertTrue(t.appearsTo(0) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(t.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(t.appearsTo(1) == 3);
         assertTrue(t.appearsTo(2) == 2);
-        assertTrue(t.appearsTo(3) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(t.appearsTo(3) == CulturecodeConfigsDefault.INVISIBLE);
 
         t = new Team<Player>(3, configs);
-        assertTrue(t.appearsTo(0) == BarngaOnlineConfigsDefault.INVISIBLE);
+        assertTrue(t.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(t.appearsTo(1) == 0);
         assertTrue(t.appearsTo(2) == 3);
         assertTrue(t.appearsTo(3) == 3);

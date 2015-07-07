@@ -21,7 +21,9 @@ food_per_player = 10
 maximum_points = 200
 
 # No more food is generated after this many food is in the world
-maximum_food_per_team = 100
+# Put a non-positive number to disable this
+maximum_food_per_team = 0
+#maximum_food_per_team = 100
 
 # Points you get when collecting your own team's food
 own_team_food_points = 3
@@ -30,7 +32,7 @@ own_team_food_points = 3
 other_team_food_points = 1
 
 # The number of food that's added to the world for every food a player eats
-food_regeneration = 0
+food_regeneration = 5
 
 [Visibility]
 # Rows are self, columns are others (self looking at other)

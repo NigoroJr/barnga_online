@@ -1,22 +1,34 @@
-package edu.miamioh.barnga_online.listeners;
+package edu.miamioh.culturecode.listeners;
 
 import java.util.Set;
 
 import com.corundumstudio.socketio.BroadcastOperations;
-import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIONamespace;
+import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 
-import edu.miamioh.barnga_online.*;
-import edu.miamioh.barnga_online.events.*;
+import edu.miamioh.culturecode.CulturecodeConfigsDefault;
+import edu.miamioh.culturecode.Constants;
+import edu.miamioh.culturecode.Coordinates;
+import edu.miamioh.culturecode.Food;
+import edu.miamioh.culturecode.Player;
+import edu.miamioh.culturecode.Points;
+import edu.miamioh.culturecode.Team;
+import edu.miamioh.culturecode.Util;
+import edu.miamioh.culturecode.WorldState;
+import edu.miamioh.culturecode.events.MessageFoodCoord;
+import edu.miamioh.culturecode.events.MessagePlayerCoord;
+import edu.miamioh.culturecode.events.MessagePlayerId;
+import edu.miamioh.culturecode.events.MessagePointsUpdate;
+import edu.miamioh.culturecode.events.MessageWorldParams;
 
 public class ConnectEventListener implements ConnectListener {
     protected WorldState world;
-    protected BarngaOnlineConfigsDefault configs;
+    protected CulturecodeConfigsDefault configs;
     protected SocketIOServer server;
 
-    public ConnectEventListener(BarngaOnlineConfigsDefault configs,
+    public ConnectEventListener(CulturecodeConfigsDefault configs,
             WorldState world, SocketIOServer server) {
         super();
 
@@ -33,7 +45,7 @@ public class ConnectEventListener implements ConnectListener {
         Coordinates coord = configs.initialCoordinates(playerId, teamId);
 
         Player p = new Player(playerId, teamId, coord,
-                (BarngaOnlineConfigsDefault)configs);
+                configs);
         // Make sure to associate player with the client
         world.addPlayer(p, teamId, client);
         Util.debug("Player ID %d connected at %s\n", playerId, coord);
@@ -75,7 +87,7 @@ public class ConnectEventListener implements ConnectListener {
     }
 
     private void sendPlayers(Player player, SocketIOClient client) {
-        Util util = new Util(world, (BarngaOnlineConfigsDefault)configs);
+        Util util = new Util(world, configs);
         // Broadcast about existing players to new player
         for (Team<Player> t : world.getTeams().values()) {
             for (Player otherPlayer : t) {

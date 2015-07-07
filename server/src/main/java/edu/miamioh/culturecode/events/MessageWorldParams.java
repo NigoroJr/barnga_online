@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online.events;
+package edu.miamioh.culturecode.events;
 
 public class MessageWorldParams {
     public int worldSizeX;

@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 /**
  * @author Naoki Mizuno
@@ -8,7 +8,7 @@ public class Constants {
 
     public static final String SERVER_QUIT = "q";
 
-    public static final String CONF_FILE = "barnga.conf";
+    public static final String CONF_FILE = "culturecode.conf";
 
     /* Keys for the conf file */
     public static final String CONF_HOSTNAME = "server_host";

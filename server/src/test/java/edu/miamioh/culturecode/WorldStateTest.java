@@ -1,20 +1,19 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 public class WorldStateTest extends TestCase {
     private WorldState world;
-    private BarngaOnlineConfigsDefault configs;
+    private CulturecodeConfigsDefault configs;
     private Player p, p2, p3, p4, p5;
 
     public WorldStateTest(String testName) {
         super(testName);
 
         world = new WorldState();
-        configs = new BarngaOnlineConfigsDefault(world);
+        configs = new CulturecodeConfigsDefault(world);
 
         Coordinates coord = new Coordinates(0, 0);
         p = new Player(1, 0, coord, configs);

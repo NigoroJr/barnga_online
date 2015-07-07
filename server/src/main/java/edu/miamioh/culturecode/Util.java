@@ -1,6 +1,6 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
-import edu.miamioh.barnga_online.events.MessagePlayerCoord;
+import edu.miamioh.culturecode.events.MessagePlayerCoord;
 
 /**
  * A bunch of utility methods.
@@ -10,7 +10,7 @@ import edu.miamioh.barnga_online.events.MessagePlayerCoord;
 
 public class Util {
     protected WorldState world;
-    protected BarngaOnlineConfigsDefault configs;
+    protected CulturecodeConfigsDefault configs;
 
     /**
      * Prints out the given string if Constants.DEBUG is true.
@@ -46,7 +46,7 @@ public class Util {
 		return Math.sqrt(Math.pow(x_diff, 2) + Math.pow(y_diff, 2));
     }
 
-    public Util(WorldState world, BarngaOnlineConfigsDefault configs) {
+    public Util(WorldState world, CulturecodeConfigsDefault configs) {
         this.world = world;
         this.configs = configs;
     }

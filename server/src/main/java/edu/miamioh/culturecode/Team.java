@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.util.HashSet;
 
@@ -16,7 +16,7 @@ public class Team<Player> extends java.util.HashSet<Player> {
      */
     private static final long serialVersionUID = -7556585430178027176L;
     protected int teamId;
-    protected BarngaOnlineConfigsDefault configs = null;
+    protected CulturecodeConfigsDefault configs = null;
 
     public Team() {
         super();
@@ -27,7 +27,7 @@ public class Team<Player> extends java.util.HashSet<Player> {
         this.teamId = teamId;
     }
 
-    public Team(int teamId, BarngaOnlineConfigsDefault configs) {
+    public Team(int teamId, CulturecodeConfigsDefault configs) {
         this(teamId);
         this.configs = configs;
     }
@@ -44,25 +44,27 @@ public class Team<Player> extends java.util.HashSet<Player> {
         return food.seenBy().contains(this);
     }
 
-    public boolean canSee(edu.miamioh.barnga_online.Player player) {
+    public boolean canSee(edu.miamioh.culturecode.Player player) {
         return canSee(player.teamId);
     }
 
-    public boolean canSee(edu.miamioh.barnga_online.Team<edu.miamioh.barnga_online.Player> team) {
+    public boolean canSee(
+            edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player> team) {
         return canSee(team.teamId);
     }
 
     public boolean canSee(int teamId) {
         int self = this.teamId;
         int other = teamId;
-        return configs.getPlayerVisibility()[self][other] != BarngaOnlineConfigsDefault.INVISIBLE;
+        return configs.getPlayerVisibility()[self][other] != CulturecodeConfigsDefault.INVISIBLE;
     }
 
-    public int appearsTo(edu.miamioh.barnga_online.Player player) {
+    public int appearsTo(edu.miamioh.culturecode.Player player) {
         return appearsTo(player.teamId);
     }
 
-    public int appearsTo(edu.miamioh.barnga_online.Team<edu.miamioh.barnga_online.Player> team) {
+    public int appearsTo(
+            edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player> team) {
         return appearsTo(team.getTeamId());
     }
 
@@ -73,15 +75,15 @@ public class Team<Player> extends java.util.HashSet<Player> {
         return configs.getPlayerVisibility()[self][other];
     }
 
-    public HashSet<Team<edu.miamioh.barnga_online.Player>> seenBy() {
-        HashSet<Team<edu.miamioh.barnga_online.Player>> ret =
-                new HashSet<edu.miamioh.barnga_online.Team<edu.miamioh.barnga_online.Player>>();
+    public HashSet<Team<edu.miamioh.culturecode.Player>> seenBy() {
+        HashSet<Team<edu.miamioh.culturecode.Player>> ret =
+                new HashSet<edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player>>();
 
         int[][] playerVisibility = configs.getPlayerVisibility();
         for (int i = 0; i < playerVisibility.length; i++) {
             // Can see team (but may not appear as that team)
             if (playerVisibility[i][teamId] !=
-                    BarngaOnlineConfigsDefault.INVISIBLE) {
+                    CulturecodeConfigsDefault.INVISIBLE) {
                 ret.add(configs.getWorld().getTeam(i));
             }
         }
@@ -89,15 +91,15 @@ public class Team<Player> extends java.util.HashSet<Player> {
         return ret;
     }
 
-    public HashSet<edu.miamioh.barnga_online.Team<edu.miamioh.barnga_online.Player>> getVisibleTeams() {
-        HashSet<Team<edu.miamioh.barnga_online.Player>> ret =
-                new HashSet<edu.miamioh.barnga_online.Team<edu.miamioh.barnga_online.Player>>();
+    public HashSet<edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player>> getVisibleTeams() {
+        HashSet<Team<edu.miamioh.culturecode.Player>> ret =
+                new HashSet<edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player>>();
 
         int[][] playerVisibility = configs.getPlayerVisibility();
         for (int i = 0; i < playerVisibility.length; i++) {
             // Can see team (but may not appear as that team)
             if (playerVisibility[teamId][i] !=
-                    BarngaOnlineConfigsDefault.INVISIBLE) {
+                    CulturecodeConfigsDefault.INVISIBLE) {
                 ret.add(configs.getWorld().getTeam(i));
             }
         }

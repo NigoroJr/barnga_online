@@ -1,4 +1,4 @@
-package edu.miamioh.barnga_online;
+package edu.miamioh.culturecode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,13 +7,13 @@ import java.util.Scanner;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
 
-import edu.miamioh.barnga_online.events.MessagePlayerCoord;
-import edu.miamioh.barnga_online.listeners.ConnectEventListener;
-import edu.miamioh.barnga_online.listeners.DisconnectEventListener;
-import edu.miamioh.barnga_online.listeners.MoveListener;
+import edu.miamioh.culturecode.events.MessagePlayerCoord;
+import edu.miamioh.culturecode.listeners.ConnectEventListener;
+import edu.miamioh.culturecode.listeners.DisconnectEventListener;
+import edu.miamioh.culturecode.listeners.MoveListener;
 
 /**
- * Framework for a browser game that's similar to the game barnga.
+ * Framework for a browser game that simulates cultural privileges.
  *
  * TODO: Improve Javadoc
  *
@@ -37,16 +37,16 @@ public class Main {
 
         // Game setup
         WorldState world = new WorldState();
-        BarngaOnlineConfigsDefault barngaConfigs =
-            new BarngaOnlineConfigsFromFile(world, rulesFileName);
+        CulturecodeConfigsDefault ccConfigs =
+            new CulturecodeConfigsFromFile(world, rulesFileName);
 
         // Event Listeners
         server.addConnectListener(
-                new ConnectEventListener(barngaConfigs, world, server));
+                new ConnectEventListener(ccConfigs, world, server));
         server.addDisconnectListener(
-                new DisconnectEventListener(barngaConfigs, world, server));
+                new DisconnectEventListener(ccConfigs, world, server));
         server.addEventListener(Constants.EVENT_MOVE, MessagePlayerCoord.class,
-                new MoveListener(barngaConfigs, world, server));
+                new MoveListener(ccConfigs, world, server));
 
         Scanner scn = new Scanner(System.in);
         while (true) {
