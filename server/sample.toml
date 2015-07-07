@@ -21,8 +21,7 @@ maximum_points = 200
 
 # No more food is generated after this many food is in the world
 # Put a non-positive number to disable this
-maximum_food_per_team = 0
-#maximum_food_per_team = 100
+maximum_food_per_team = 100
 
 # The number of food that's added to the world for every food a player eats
 food_regeneration = 5
