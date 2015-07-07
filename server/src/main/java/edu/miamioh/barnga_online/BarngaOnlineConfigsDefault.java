@@ -150,7 +150,8 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
         int teamId = player.teamId;
         for (int i = 0; i < FOOD_PER_PLAYER; i++) {
-            if (world.getFoods().size() > MAXIMUM_FOOD_PER_TEAM) {
+            if (MAXIMUM_FOOD_PER_TEAM > 0
+                    && world.getFoods().size() > MAXIMUM_FOOD_PER_TEAM) {
                 break;
             }
 
@@ -199,7 +200,8 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
         int teamId = player.teamId;
         for (int i = 0; i < FOOD_REGENERATION; i++) {
-            if (world.getFoods().size() > MAXIMUM_FOOD_PER_TEAM) {
+            if (MAXIMUM_FOOD_PER_TEAM > 0
+                    && world.getFoods().size() > MAXIMUM_FOOD_PER_TEAM) {
                 break;
             }
 
