@@ -22,7 +22,14 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
         }
         catch (IllegalStateException e) {
             e.printStackTrace();
-            System.err.printf("Configuration file is misformatted!", filename);
+            System.err.printf("Rules file %s misformatted!\n", filename);
+            System.err.println("Falling back to default configs");
+            return;
+        }
+        // FileNotFoundException
+        catch (RuntimeException e) {
+            e.printStackTrace();
+            System.err.printf("Configuration file %s not found!\n", filename);
             System.err.println("Falling back to default configs");
             return;
         }
