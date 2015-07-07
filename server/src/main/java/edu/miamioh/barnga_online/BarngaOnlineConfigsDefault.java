@@ -68,6 +68,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     protected int[][] foodVisibility;
     protected int[][] foodEatability;
 
+    protected int[] teamAssignment;
     private int playerCounter = 0;
     private int foodCounter = 0;
 
@@ -87,6 +88,10 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
         foodVisibility = DEFAULT_FOOD_VISIBILITY;
         foodEatability = DEFAULT_FOOD_EATABILITY;
 
+        teamAssignment = new int[TEAM_NUMBER];
+        for (int i = 0; i < TEAM_NUMBER; i++) {
+            teamAssignment[i] = i;
+        }
         // Note: Food will be generated per client connection
     }
 
@@ -103,7 +108,8 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     @Override
     public int assignTeam(int playerId) {
-        return playerCounter++ % TEAM_NUMBER;
+        int index = playerCounter++ % teamAssignment.length;
+        return teamAssignment[index];
     }
 
     @Override

@@ -7,6 +7,9 @@ size_x = 3000
 size_y = 3000
 # Number of teams
 teams = 4
+# The order in which players are assigned teams
+team_assignment = [0, 1, 2, 3]
+#team_assignment = [3, 2, 0 ,1, 0, 0, 0, 0]
 food_per_player = 10
 # Collect this many points to win the game
 # Put a non-positive number to disable this

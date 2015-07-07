@@ -74,6 +74,7 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
         processTable("Visibility.player", toml, playerVisibility);
         processTable("Visibility.food_visible", toml, foodVisibility);
         processTable("Visibility.food_eatable", toml, foodEatability);
+        getTeamAssignment("World.team_assignment", toml);
 
         // Dump tables that were read
         if (Constants.DEBUG) {
@@ -98,6 +99,11 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
                 }
                 Util.debug("");
             }
+            Util.debug("Dumping Team Assignment");
+            for (int i = 0; i < teamAssignment.length; i++) {
+                Util.debug("%2d ", teamAssignment[i]);
+            }
+            Util.debug("");
         }
     }
 
@@ -113,6 +119,19 @@ public class BarngaOnlineConfigsFromFile extends BarngaOnlineConfigsDefault {
             for (int j = 0; j < cols.size(); j++) {
                 toModify[i][j] = cols.get(j).intValue();
             }
+        }
+    }
+
+    private void getTeamAssignment(String tableName, Toml toml) {
+        List<Long> list = toml.getList(tableName);
+
+        if (list == null) {
+            return;
+        }
+
+        teamAssignment = new int[list.size()];
+        for (int i = 0; i < teamAssignment.length; i++) {
+            teamAssignment[i] = list.get(i).intValue();
         }
     }
 }
