@@ -85,34 +85,11 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         getTeamAssignment("World.team_assignment", toml);
 
         // Dump tables that were read
-        if (Constants.DEBUG) {
-            Util.debug("Dumping Player visibility table");
-            for (int i = 0; i < TEAM_NUMBER; i++) {
-                for (int j = 0; j < TEAM_NUMBER; j++) {
-                    Util.debug("%2d ", playerVisibility[i][j]);
-                }
-                Util.debug("");
-            }
-            Util.debug("Dumping Food visibility table");
-            for (int i = 0; i < TEAM_NUMBER; i++) {
-                for (int j = 0; j < TEAM_NUMBER; j++) {
-                    Util.debug("%2d ", foodVisibility[i][j]);
-                }
-                Util.debug("");
-            }
-            Util.debug("Dumping Food eatability table");
-            for (int i = 0; i < TEAM_NUMBER; i++) {
-                for (int j = 0; j < TEAM_NUMBER; j++) {
-                    Util.debug("%2s ", foodEatability[i][j] == T ? "T" : "F");
-                }
-                Util.debug("");
-            }
-            Util.debug("Dumping Team Assignment");
-            for (int i = 0; i < teamAssignment.length; i++) {
-                Util.debug("%2d ", teamAssignment[i]);
-            }
-            Util.debug("");
-        }
+        dumpTable("Player Visibility", playerVisibility);
+        dumpTable("Food Visibility", foodVisibility);
+        dumpTable("Food Eatability", foodEatability);
+        dumpList("Team Assignment", teamAssignment);
+        dumpList("Speed", speed);
     }
 
     private void processTable(String tableName, Toml toml, int[][] toModify) {
@@ -153,5 +130,23 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = list.get(i).intValue();
         }
+    }
+
+    private void dumpTable(String name, int[][] table) {
+        Util.debug(name);
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table[i].length; j++) {
+                Util.debug("%2d ", table[i][j]);
+            }
+            Util.debug("");
+        }
+    }
+
+    private void dumpList(String name, int[] list) {
+        Util.debug(name);
+        for (int i = 0; i < teamAssignment.length; i++) {
+            Util.debug("%2d ", list[i]);
+        }
+        Util.debug("");
     }
 }
