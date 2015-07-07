@@ -144,7 +144,7 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
 
     private void dumpList(String name, int[] list) {
         Util.debug(name);
-        for (int i = 0; i < teamAssignment.length; i++) {
+        for (int i = 0; i < list.length; i++) {
             Util.debug("%2d ", list[i]);
         }
         Util.debug("");
