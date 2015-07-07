@@ -34,6 +34,10 @@ other_team_food_points = 1
 # The number of food that's added to the world for every food a player eats
 food_regeneration = 5
 
+[Player]
+# Must be a positive integer. 1 to 10 recommended.
+speed = [2, 3, 5, 8]
+
 [Visibility]
 # Rows are self, columns are others (self looking at other)
 # -1 for invisible

@@ -1,6 +1,6 @@
 Server API
 ==========
-Version: 1.4.0
+Version: 1.4.1
 
 Container Classes
 -----------------
@@ -45,9 +45,10 @@ MessagePointsUpdate
     newPoint : int
 
 MessageWorldParams
-    worldSizeX : int
-    worldSizeY : int
-    gridSize   : int
+    worldSizeX  : int
+    worldSizeY  : int
+    gridSize    : int
+    playerSpeed : int
 
 
 Events FROM server

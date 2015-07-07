@@ -47,6 +47,7 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
         {0, 1, 2, 3},   // Team 2: Sees food for all other teams
         {3, 3, 3, 3},   // Team 3: Everything looks the same
     };
+    public static final int[] DEFAULT_SPEED = {2, 2, 2, 2};
 
     /* Will get updated on reading configuration file */
     /* Note: These are NOT constants (even though they act like them) */
@@ -68,6 +69,8 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     protected int[][] foodVisibility;
     protected int[][] foodEatability;
 
+    protected int[] speed;
+
     protected int[] teamAssignment;
     private int playerCounter = 0;
     private int foodCounter = 0;
@@ -87,6 +90,8 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
         playerVisibility = DEFAULT_PLAYER_VISIBILITY;
         foodVisibility = DEFAULT_FOOD_VISIBILITY;
         foodEatability = DEFAULT_FOOD_EATABILITY;
+
+        speed = DEFAULT_SPEED;
 
         teamAssignment = new int[TEAM_NUMBER];
         for (int i = 0; i < TEAM_NUMBER; i++) {
@@ -300,5 +305,9 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
 
     public int getGridSize() {
         return CLIENT_GRID_SIZE;
+    }
+
+    public int getSpeed(int teamId) {
+        return speed[teamId];
     }
 }

@@ -462,6 +462,8 @@ socket.on('worldParams', function(MessageWorldParams) {
   worldInfo.width = MessageWorldParams.worldSizeX;
   worldInfo.height = MessageWorldParams.worldSizeY;
   initFood(food);
+
+  playerInfo.speed = MessageWorldParams.playerSpeed;
 });
 
 socket.on('playerUpdate', function(MessagePlayerCoord) {

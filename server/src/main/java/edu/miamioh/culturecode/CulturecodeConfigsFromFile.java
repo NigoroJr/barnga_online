@@ -81,6 +81,7 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         processTable("Visibility.player", toml, playerVisibility);
         processTable("Visibility.food_visible", toml, foodVisibility);
         processTable("Visibility.food_eatable", toml, foodEatability);
+        processList("Player.speed", toml, speed);
         getTeamAssignment("World.team_assignment", toml);
 
         // Dump tables that were read
@@ -129,8 +130,8 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         }
     }
 
-    private void getTeamAssignment(String tableName, Toml toml) {
-        List<Long> list = toml.getList(tableName);
+    private void getTeamAssignment(String listName, Toml toml) {
+        List<Long> list = toml.getList(listName);
 
         if (list == null) {
             return;
@@ -139,6 +140,18 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         teamAssignment = new int[list.size()];
         for (int i = 0; i < teamAssignment.length; i++) {
             teamAssignment[i] = list.get(i).intValue();
+        }
+    }
+
+    private void processList(String listName, Toml toml, int[] arr) {
+        List<Long> list = toml.getList(listName);
+
+        if (list == null) {
+            return;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = list.get(i).intValue();
         }
     }
 }

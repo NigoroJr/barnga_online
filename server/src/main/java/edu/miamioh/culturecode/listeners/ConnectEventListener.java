@@ -65,7 +65,7 @@ public class ConnectEventListener implements ConnectListener {
         }
 
         // Tell the client about world size etc.
-        sendWorldParams(client);
+        sendWorldParams(client, teamId);
         // Send player's identity
         client.sendEvent(Constants.EVENT_PLAYER_ID, new MessagePlayerId(p));
         // Generate food for player's team
@@ -160,11 +160,12 @@ public class ConnectEventListener implements ConnectListener {
         }
     }
 
-    private void sendWorldParams(SocketIOClient client) {
+    private void sendWorldParams(SocketIOClient client, int teamId) {
         MessageWorldParams mes = new MessageWorldParams(
                 configs.getWorldSizeX(),
                 configs.getWorldSizeY(),
-                configs.getGridSize());
+                configs.getGridSize(),
+                configs.getSpeed(teamId));
 
         client.sendEvent(Constants.EVENT_WORLD_PARAMS, mes);
     }
