@@ -24,7 +24,7 @@ maximum_points = 200
 maximum_food_per_team = 100
 
 # The number of food that's added to the world for every food a player eats
-food_regeneration = 5
+food_regeneration = 0
 
 [Player]
 # Must be a positive integer. 1 to 10 recommended.
