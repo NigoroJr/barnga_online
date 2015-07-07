@@ -26,8 +26,8 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     public static final int DEFAULT_MAXIMUM_FOOD_PER_TEAM = 100;
     public static final int DEFAULT_MAXIMUM_POINTS = 100;
     /* How many points a player gets when eating a food */
-    public static final int DEFAULT_OWN_TEAM_FOOD_POINTS = 3;
-    public static final int DEFAULT_OTHER_TEAM_FOOD_POINTS = 2;
+    public static final int[] DEFAULT_OWN_TEAM_FOOD_POINTS = {3, 3, 3, 3};
+    public static final int[] DEFAULT_OTHER_TEAM_FOOD_POINTS = {1, 1, 1, 1};
     public static final int DEFAULT_FOOD_REGENERATION = 0;
     public static final int[][] DEFAULT_PLAYER_VISIBILITY = {
         {0, I, I, I},   // Team 0: Doesn't see any other team
@@ -58,8 +58,6 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     protected int TEAM_NUMBER = DEFAULT_TEAM_NUMBER;
     protected int FOOD_PER_PLAYER = DEFAULT_FOOD_PER_PLAYER;
     protected int MAXIMUM_FOOD_PER_TEAM = DEFAULT_MAXIMUM_FOOD_PER_TEAM;
-    protected int OWN_TEAM_FOOD_POINTS = DEFAULT_OWN_TEAM_FOOD_POINTS;
-    protected int OTHER_TEAM_FOOD_POINTS = DEFAULT_OTHER_TEAM_FOOD_POINTS;
     protected int FOOD_REGENERATION = DEFAULT_FOOD_REGENERATION;
     protected int MAXIUMUM_POINTS = DEFAULT_MAXIMUM_POINTS;
 
@@ -70,6 +68,8 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     protected int[][] foodEatability;
 
     protected int[] speed;
+    protected int[] ownTeamFoodPoints = DEFAULT_OWN_TEAM_FOOD_POINTS;
+    protected int[] otherTeamFoodPoints = DEFAULT_OTHER_TEAM_FOOD_POINTS;
 
     protected int[] teamAssignment;
     private int playerCounter = 0;
@@ -269,10 +269,10 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     public void handlePoints(Player player, Food food) {
         int amount;
         if (food.team == player.teamId) {
-            amount = OWN_TEAM_FOOD_POINTS;
+            amount = ownTeamFoodPoints[player.teamId];
         }
         else {
-            amount = OTHER_TEAM_FOOD_POINTS;
+            amount = otherTeamFoodPoints[player.teamId];
         }
 
         Points teamPoints = world.getPoints().get(player.teamId);

@@ -47,12 +47,16 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
             WORLD_Y = val.intValue();
         }
 
+        /* This should be read BEFORE anything that uses the team number */
         if ((val = toml.getLong("World.teams")) != null) {
             TEAM_NUMBER = val.intValue();
+
             playerVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
             foodVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
             foodEatability = new int[TEAM_NUMBER][TEAM_NUMBER];
             speed = new int[TEAM_NUMBER];
+            ownTeamFoodPoints = new int[TEAM_NUMBER];
+            otherTeamFoodPoints = new int[TEAM_NUMBER];
         }
 
         if ((val = toml.getLong("World.food_per_player")) != null) {
@@ -61,14 +65,6 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
 
         if ((val = toml.getLong("World.maximum_food_per_team")) != null) {
             MAXIMUM_FOOD_PER_TEAM = val.intValue();
-        }
-
-        if ((val = toml.getLong("World.own_team_food_points")) != null) {
-            OWN_TEAM_FOOD_POINTS = val.intValue();
-        }
-
-        if ((val = toml.getLong("World.other_team_food_points")) != null) {
-            OTHER_TEAM_FOOD_POINTS = val.intValue();
         }
 
         if ((val = toml.getLong("World.food_regeneration")) != null) {
@@ -83,6 +79,8 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         processTable("Visibility.food_visible", toml, foodVisibility);
         processTable("Visibility.food_eatable", toml, foodEatability);
         processList("Player.speed", toml, speed);
+        processList("Player.own_team_food_points", toml, ownTeamFoodPoints);
+        processList("Player.other_team_food_points", toml, otherTeamFoodPoints);
         getTeamAssignment("World.team_assignment", toml);
 
         // Dump tables that were read
