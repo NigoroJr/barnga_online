@@ -52,6 +52,7 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
             playerVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
             foodVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
             foodEatability = new int[TEAM_NUMBER][TEAM_NUMBER];
+            speed = new int[TEAM_NUMBER];
         }
 
         if ((val = toml.getLong("World.food_per_player")) != null) {
