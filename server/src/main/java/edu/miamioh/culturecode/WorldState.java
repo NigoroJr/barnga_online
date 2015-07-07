@@ -1,6 +1,5 @@
 package edu.miamioh.culturecode;
 
-import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,7 +16,7 @@ public class WorldState {
     protected int worldSizeX, worldSizeY;
 
     /* Associates SocketIOClient to Player */
-    protected HashMap<SocketAddress, Player> clients;
+    protected HashMap<SocketIOClient, Player> clients;
 
     protected CulturecodeConfigsDefault configs;
 
@@ -28,16 +27,20 @@ public class WorldState {
      * Default constructor.
      */
     public WorldState() {
+        init();
+    }
+
+    public void init() {
         reset();
+        clients = new HashMap<SocketIOClient, Player>();
+        maxId = 0;
     }
 
     public void reset() {
         teams = new HashMap<Integer, Team<Player>>();
         foods = new HashMap<Integer, Food>();
         points = new HashMap<Integer, Points>();
-        clients = new HashMap<SocketAddress, Player>();
         gameStarted = false;
-        maxId = 0;
     }
 
     /**
@@ -116,6 +119,12 @@ public class WorldState {
             teams.put(teamId, new Team<Player>(teamId, player.getConfigs()));
         }
 
+        // Initialize points if it's first time adding points
+        if (!points.containsKey(teamId)) {
+            points.put(teamId, new Points());
+        }
+
+
         Team<Player> playerTeam = teams.get(teamId);
         playerTeam.add(player);
     }
@@ -123,7 +132,7 @@ public class WorldState {
     public void addPlayer(Player player, int teamId,
             SocketIOClient client) {
         addPlayer(player, teamId);
-        clients.put(client.getRemoteAddress(), player);
+        clients.put(client, player);
     }
 
     /**
@@ -146,10 +155,10 @@ public class WorldState {
         int teamId = player.teamId;
         teams.get(teamId).remove(player);
 
-        // Find the corresponding SocketAddress of this player
-        for (SocketAddress addr : getClients().keySet()) {
-            if (getClients().get(addr).equals(player)) {
-                getClients().remove(addr);
+        // Find the corresponding SocketIOClient of this player
+        for (SocketIOClient client : getClients().keySet()) {
+            if (getClients().get(client).equals(player)) {
+                getClients().remove(client);
                 break;
             }
         }
@@ -396,7 +405,7 @@ public class WorldState {
         this.gameStarted = gameStarted;
     }
 
-    public HashMap<SocketAddress, Player> getClients() {
+    public HashMap<SocketIOClient, Player> getClients() {
         return clients;
     }
 }

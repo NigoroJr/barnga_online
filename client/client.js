@@ -430,6 +430,14 @@ socket.on('gameStart', function() {
   console.log('Game has started');
   toggleVisibility('scoreboard', 'visible');
   startGame = true;
+
+  (function animationLoop() {
+      if(connected && startGame){
+          requestAnimationFrame(animationLoop);
+      }
+      gameLoop();
+  })();
+
 });
 
 socket.on('gameEnd', function() {
@@ -439,6 +447,8 @@ socket.on('gameEnd', function() {
   // Reset state variables
   players = {};
   initFood(food);
+  clearCanvas();
+  drawGame();
   // Dummy data
   myPlayer= {id: 42, teamId: 42, coord: {x: 42, y: 42}};
 });

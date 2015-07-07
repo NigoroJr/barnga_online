@@ -13,7 +13,6 @@ import edu.miamioh.culturecode.Constants;
 import edu.miamioh.culturecode.Coordinates;
 import edu.miamioh.culturecode.Food;
 import edu.miamioh.culturecode.Player;
-import edu.miamioh.culturecode.Points;
 import edu.miamioh.culturecode.Team;
 import edu.miamioh.culturecode.Util;
 import edu.miamioh.culturecode.WorldState;
@@ -58,11 +57,6 @@ public class ConnectEventListener implements ConnectListener {
             server.addNamespace(Integer.toString(teamId));
         }
         client.joinRoom(Integer.toString(teamId));
-
-        // Initialize points if it's first time adding points
-        if (!world.getPoints().containsKey(teamId)) {
-            world.getPoints().put(teamId, new Points());
-        }
 
         // Tell the client about world size etc.
         sendWorldParams(client, teamId);
