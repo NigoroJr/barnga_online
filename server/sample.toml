@@ -5,20 +5,31 @@ grid_size = 25
 # World size, in pixels
 size_x = 3000
 size_y = 3000
+
 # Number of teams
 teams = 4
+
 # The order in which players are assigned teams
 team_assignment = [0, 1, 2, 3]
 #team_assignment = [3, 2, 0 ,1, 0, 0, 0, 0]
+
+# Food added to the world per player connection
 food_per_player = 10
+
 # Collect this many points to win the game
 # Put a non-positive number to disable this
 maximum_points = 200
+
+# No more food is generated after this many food is in the world
 maximum_food_per_team = 100
+
 # Points you get when collecting your own team's food
 own_team_food_points = 3
+
 # Points you get when collecting other teams' food
 other_team_food_points = 1
+
+# The number of food that's added to the world for every food a player eats
 food_regeneration = 0
 
 [Visibility]
