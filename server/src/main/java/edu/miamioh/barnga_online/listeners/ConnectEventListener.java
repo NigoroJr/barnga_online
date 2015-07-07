@@ -92,7 +92,6 @@ public class ConnectEventListener implements ConnectListener {
                 client.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
             }
         }
-        Util.debug("Sent to %d about existing players\n", player.id);
 
         // Send message to currently existing teams
         for (Team<Player> t : world.getTeams().values()) {
@@ -107,7 +106,6 @@ public class ConnectEventListener implements ConnectListener {
             BroadcastOperations room = server.getRoomOperations(roomName);
             room.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
         }
-        Util.debug("Sent to existing teams about Player %d\n", player.id);
     }
 
     /**
@@ -133,7 +131,6 @@ public class ConnectEventListener implements ConnectListener {
                 room.sendEvent(Constants.EVENT_FOOD_UPDATE, mes);
             }
         }
-        Util.debug("Sent to existing teams about new food state");
     }
 
     /**
