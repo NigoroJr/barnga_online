@@ -126,7 +126,7 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     @Override
     public boolean gameEnds() {
         for (Points p : world.getPoints().values()) {
-            if (MAXIUMUM_POINTS > 0 && p.getTotal() > MAXIUMUM_POINTS) {
+            if (MAXIUMUM_POINTS > 0 && p.getTotal() >= MAXIUMUM_POINTS) {
                 return true;
             }
         }
