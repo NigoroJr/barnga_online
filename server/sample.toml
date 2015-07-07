@@ -10,8 +10,7 @@ size_y = 3000
 teams = 4
 
 # The order in which players are assigned teams
-team_assignment = [0, 1, 2, 3]
-#team_assignment = [3, 2, 0 ,1, 0, 0, 0, 0]
+team_assignment = [0, 1, 2, 3, 1]
 
 # Food added to the world per player connection
 food_per_player = 10
