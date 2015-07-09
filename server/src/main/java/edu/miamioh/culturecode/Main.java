@@ -33,7 +33,8 @@ public class Main {
 
         SocketIOServer server = new SocketIOServer(config);
         server.start();
-        Util.debug("Server started. Type " + Constants.SERVER_QUIT + " to quit.");
+        System.out.printf("Server started at %s port %d.", hostName, port);
+        System.out.printf("Type %s to quit.", Constants.SERVER_QUIT);
 
         // Game setup
         WorldState world = new WorldState();

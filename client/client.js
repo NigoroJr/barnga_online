@@ -419,9 +419,6 @@ function spinner() {
 socket.on('connect', function() {
   connected = true;
   connectingSplash();
-
-  // Make sure there's no event handler registered
-  $('#scoreboard').off('click');
 });
 
 // When some player disconnects
