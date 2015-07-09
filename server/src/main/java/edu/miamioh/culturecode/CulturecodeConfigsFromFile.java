@@ -59,6 +59,8 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
             speed = new int[TEAM_NUMBER];
             ownTeamFoodPoints = new int[TEAM_NUMBER];
             otherTeamFoodPoints = new int[TEAM_NUMBER];
+            foodRegeneration = new int[TEAM_NUMBER];
+            randomFoodRegeneration = new int[TEAM_NUMBER];
         }
 
         if ((val = toml.getLong("World.food_per_player")) != null) {
@@ -69,10 +71,6 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
             MAXIMUM_FOOD_PER_TEAM = val.intValue();
         }
 
-        if ((val = toml.getLong("World.food_regeneration")) != null) {
-            FOOD_REGENERATION = val.intValue();
-        }
-
         if ((val = toml.getLong("World.maximum_points")) != null) {
             MAXIUMUM_POINTS = val.intValue();
         }
@@ -80,9 +78,11 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         processTable("Visibility.player", toml, playerVisibility);
         processTable("Visibility.food_visible", toml, foodVisibility);
         processTable("Visibility.food_eatable", toml, foodEatability);
-        processList("Player.speed", toml, speed);
-        processList("Player.own_team_food_points", toml, ownTeamFoodPoints);
-        processList("Player.other_team_food_points", toml, otherTeamFoodPoints);
+        processList("Team.speed", toml, speed);
+        processList("Team.own_team_food_points", toml, ownTeamFoodPoints);
+        processList("Team.other_team_food_points", toml, otherTeamFoodPoints);
+        processList("Team.food_regeneration", toml, foodRegeneration);
+        processList("Team.random_food_regeneration", toml, randomFoodRegeneration);
         getTeamAssignment("World.team_assignment", toml);
 
         // Dump tables that were read
@@ -91,6 +91,8 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         dumpTable("Food Eatability", foodEatability);
         dumpList("Team Assignment", teamAssignment);
         dumpList("Speed", speed);
+        dumpList("Food Regeneration", foodRegeneration);
+        dumpList("Random Food Regeneration", randomFoodRegeneration);
     }
 
     private void processTable(String tableName, Toml toml, int[][] toModify) {

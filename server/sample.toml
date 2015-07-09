@@ -27,10 +27,7 @@ maximum_points = 200
 # Put a non-positive number to disable this
 maximum_food_per_team = 100
 
-# The number of food that's added to the world for every food a player eats
-food_regeneration = 0
-
-[Player]
+[Team]
 # Must be a positive integer. 1 to 10 recommended.
 speed = [2, 3, 5, 8]
 
@@ -39,6 +36,14 @@ own_team_food_points = [3, 3, 1, 10]
 
 # Points you get when collecting other teams' food
 other_team_food_points = [1, 1, 0, 3]
+
+# The number of food that's added to the world for every food a player eats
+food_regeneration = [1, 0, 1, 0]
+
+# Randomly generates 0 to N (inclusive) food whenever a player in any team
+# eats a food. Combine this with food_regeneration to randomly generate
+# between N and M food.
+random_food_regeneration = [0, 3, 0, 0]
 
 [Visibility]
 # Rows are self, columns are others (self looking at other)

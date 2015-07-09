@@ -29,7 +29,8 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     /* How many points a player gets when eating a food */
     public static final int[] DEFAULT_OWN_TEAM_FOOD_POINTS = {3, 3, 3, 3};
     public static final int[] DEFAULT_OTHER_TEAM_FOOD_POINTS = {1, 1, 1, 1};
-    public static final int DEFAULT_FOOD_REGENERATION = 0;
+    public static final int[] DEFAULT_FOOD_REGENERATION = {0, 0, 0, 0};
+    public static final int[] DEFAULT_RANDOM_FOOD_REGENERATION = {0, 0, 0, 0};
     public static final int[][] DEFAULT_PLAYER_VISIBILITY = {
         {0, I, I, I},   // Team 0: Doesn't see any other team
         {2, 1, 3, 0},   // Team 1: Sees different from actual
@@ -60,7 +61,6 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     protected int TEAM_NUMBER = DEFAULT_TEAM_NUMBER;
     protected int FOOD_PER_PLAYER = DEFAULT_FOOD_PER_PLAYER;
     protected int MAXIMUM_FOOD_PER_TEAM = DEFAULT_MAXIMUM_FOOD_PER_TEAM;
-    protected int FOOD_REGENERATION = DEFAULT_FOOD_REGENERATION;
     protected int MAXIUMUM_POINTS = DEFAULT_MAXIMUM_POINTS;
 
     protected WorldState world;
@@ -72,6 +72,8 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     protected int[] speed;
     protected int[] ownTeamFoodPoints = DEFAULT_OWN_TEAM_FOOD_POINTS;
     protected int[] otherTeamFoodPoints = DEFAULT_OTHER_TEAM_FOOD_POINTS;
+    protected int[] foodRegeneration = DEFAULT_FOOD_REGENERATION;
+    protected int[] randomFoodRegeneration = DEFAULT_FOOD_REGENERATION;
 
     protected int[] teamAssignment;
     private int playerCounter = 0;
@@ -211,7 +213,9 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
         HashSet<Food> ret = new HashSet<Food>();
 
         int teamId = player.teamId;
-        for (int i = 0; i < FOOD_REGENERATION; i++) {
+        int totalRegenerated = foodRegeneration[teamId] +
+            (int)(Math.random() * randomFoodRegeneration[teamId] + 1);
+        for (int i = 0; i < totalRegenerated; i++) {
             if (MAXIMUM_FOOD_PER_TEAM > 0
                     && world.getFoods().size() > MAXIMUM_FOOD_PER_TEAM) {
                 break;
