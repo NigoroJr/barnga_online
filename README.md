@@ -12,39 +12,41 @@ This game was inspired by the game Barnga, created by Sivasailam (Thiagi)
 Thiagarajan and Barbara Steinwachs (1990).
 
 ## Installation
-### Dependencies
-These are the dependencies for compiling and running the server.
-
+### Requirements
 * JDK (1.7 used for testing)
-* Apache Maven (3.0.4 used for testing)
 * Web server to host the client web pages
 
-The following browsers has been used to test the functionalities of the
+#### When compiling from source
+* Apache Maven (3.0.4 used for testing)
+
+The following browsers have been used to test the functionalities of the
 program.
 
 * Google Chrome
 * Firefox
 
 ### Installing
+#### Using the pre-built jar file
+1. Download the jar file from
+   [releases](https://github.com/NigoroJr/culturecode/releases/latest)
 
-1. Clone the repository
-    * `git clone https://github.com/NigoroJr/culturecode`
-2. Go into the `server` directory
-    * `cd server`
-3. Run Apache Maven
-    * `mvn install`
-4. Edit `server/culturecode.conf` and change the host address
-4. Run the program
-    * `mvn exec:java`
-5. Type `q` to quit the server
-6. Edit `client/client.js` and change `localhost` to whatever your webpage's
-   address is
+#### Compiling from source
+1. `git clone https://github.com/NigoroJr/culturecode`
+2. `cd culturecode/server`
+3. `mvn assembly:single`
+
+### Running
+1. Edit `server/culturecode.conf`
+2. Run the program
+    * `java -jar path/to/jar/file`
+3. Edit `client/client.js` and change `localhost` to whatever your webpage's
+   address is, and put it to a publicly-accessibly directory.
 
 ## Configurations
-Currently, adding a TOML file in the `server` directory allows customizing
+Adding a TOML file in the same directory as the jar file allows customizing
 basic behavior of the game. For example, the world size, number of teams, and
 how each team can see other teams/food can be defined in this file. See the
-provided `sample.toml` to see the various parameters.
+provided `sample.toml` for various parameters.
 
 ## TODO
 * detailed installation guide
