@@ -68,6 +68,13 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
     }
 
     private void restartGame() {
+        try {
+            Thread.sleep(configs.getGameInterval() * 1000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Prepare for a new round
         for (SocketIOClient c : world.getClients().keySet()) {
             Player p = world.getClients().get(c);

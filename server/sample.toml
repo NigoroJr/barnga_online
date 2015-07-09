@@ -1,5 +1,9 @@
+[System]
 # Grid size of client in pixels
 grid_size = 25
+
+# Wait time between each game in seconds
+game_interval = 5
 
 [World]
 # World size, in pixels

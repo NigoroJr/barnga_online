@@ -35,8 +35,12 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         }
 
         Long val;
-        if ((val = toml.getLong("grid_size")) != null) {
+        if ((val = toml.getLong("System.grid_size")) != null) {
             CLIENT_GRID_SIZE = val.intValue();
+        }
+
+        if ((val = toml.getLong("System.game_interval")) != null) {
+            GAME_INTERVAL = val.intValue();
         }
 
         if ((val = toml.getLong("World.size_x")) != null) {

@@ -20,6 +20,7 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     public static final int DEFAULT_WORLD_X = 3000;
     public static final int DEFAULT_WORLD_Y = 3000;
     public static final int DEFAULT_GRID_SIZE = 25;
+    public static final int DEFAULT_GAME_INTERVAL = 10;
     /* Used when assigning team */
     public static final int DEFAULT_TEAM_NUMBER = 4;
     public static final int DEFAULT_FOOD_PER_PLAYER = 10;
@@ -53,6 +54,7 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     /* Note: These are NOT constants (even though they act like them) */
     protected int WORLD_X = DEFAULT_WORLD_X;
     protected int WORLD_Y = DEFAULT_WORLD_Y;
+    protected int GAME_INTERVAL = DEFAULT_GAME_INTERVAL;
     /* Grid size of clients */
     protected int CLIENT_GRID_SIZE = DEFAULT_GRID_SIZE;
     protected int TEAM_NUMBER = DEFAULT_TEAM_NUMBER;
@@ -309,5 +311,9 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
 
     public int getSpeed(int teamId) {
         return speed[teamId];
+    }
+
+    public int getGameInterval() {
+        return GAME_INTERVAL;
     }
 }
