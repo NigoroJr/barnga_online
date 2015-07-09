@@ -419,6 +419,9 @@ function spinner() {
 socket.on('connect', function() {
   connected = true;
   connectingSplash();
+
+  // Make sure there's no event handler registered
+  $('#scoreboard').off('click');
 });
 
 // When some player disconnects
@@ -437,12 +440,31 @@ socket.on('gameStart', function() {
       }
       gameLoop();
   })();
-
 });
 
 socket.on('gameEnd', function() {
   console.log('Game has ended');
   startGame = false;
+
+  var origTop = $('#scoreboard').css('top');
+  var origRight = $('#scoreboard').css('right');
+  $('#scoreboard').animate({
+      transform: 'scale(2, 2)',
+      top: '50%',
+      right: '50%',
+  });
+
+  $('#scoreboard').on('click', function() {
+      $('#scoreboard').animate({
+          position: 'absolute',
+          transform: 'scale(1, 1)',
+          top: origTop,
+          right: origRight,
+      });
+
+      $('#scoreboard').off('click');
+      return false;
+  });
 
   // Reset state variables
   players = {};
