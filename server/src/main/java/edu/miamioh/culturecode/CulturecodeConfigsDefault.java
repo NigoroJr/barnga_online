@@ -135,10 +135,15 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
 
         // Finish game when all foods are taken
         boolean[] ateAll = new boolean[TEAM_NUMBER];
+        // Initialize
         for (int i = 0; i < ateAll.length; i++) {
-            ateAll[i] = true;
+            // Only check the food for teams that have at least one player
+            if (world.getTeam(i).size() > 0) {
+                ateAll[i] = true;
+            }
         }
 
+        // Team has at least one uneaten food
         for (Food f : world.getFoods().values()) {
             ateAll[f.team] = false;
         }
