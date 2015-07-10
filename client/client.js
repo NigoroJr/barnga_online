@@ -521,9 +521,9 @@ socket.on('playerUpdate', function(MessagePlayerCoord) {
     // Generate a random number for the team
     if (teamId >= teamColors.length) {
       teamColors[teamId] = sprintf('rgb(%d, %d, %d)',
-          Math.floor(Math.random() * 255),
-          Math.floor(Math.random() * 255),
-          Math.floor(Math.random() * 255));
+          Math.floor(Math.random() * 256),
+          Math.floor(Math.random() * 256),
+          Math.floor(Math.random() * 256));
     }
 
     // Color
