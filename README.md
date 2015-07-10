@@ -24,6 +24,7 @@ program.
 
 * Google Chrome
 * Firefox
+* Internet Explorer 11
 
 ### Installing
 #### Using the pre-built jar file
