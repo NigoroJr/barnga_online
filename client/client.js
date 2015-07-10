@@ -132,10 +132,12 @@ var canvasContext = canvas.getContext('2d');
 
 var keys = [];
 window.addEventListener('keydown', function(e) {
+  e.preventDefault();
   keys[e.keyCode] = true;
 }, false);
 
 window.addEventListener('keyup', function(e) {
+  e.preventDefault();
   keys[e.keyCode] = false;
 }, false);
 
