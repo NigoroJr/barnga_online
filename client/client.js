@@ -271,8 +271,10 @@ function drawGame() {
   var vecX = [-1, 0, 1];
   var vecY = [-1, 0, 1];
   var concatFood = {};
-  for (i of vecX) {
-    for (j of vecY) {
+  for (i in vecX) {
+    i = vecX[i];
+    for (j in vecY) {
+      j = vecY[j];
       var tileX = currentTile.x + i;
       var tileY = currentTile.y + j;
       if (typeof food[tileY] === 'undefined'
