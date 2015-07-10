@@ -9,6 +9,8 @@ var socket = io.connect('http://localhost:3000');
 var teamColors = [
   '#00FFA7', '#010DE8', '#FF0C8B', '#E88001', '#D6FF01',
   '#FFD00B', '#E8380A', '#A718FF', '#0A9FE8', '#10FF0D',
+  '#A1FF56', '#E8B74E', '#FF6762', '#7B4EE8', '#62FAFF',
+  '#FFEE5A', '#E88652', '#EE67FF', '#528EE8', '#67FF94',
 ];
 
 //Personalized for any screen size
@@ -516,6 +518,14 @@ socket.on('playerUpdate', function(MessagePlayerCoord) {
   var teamId = MessagePlayerCoord.player.teamId;
   // First time to see the team
   if (typeof teams[teamId] === 'undefined') {
+    // Generate a random number for the team
+    if (teamId >= teamColors.length) {
+      teamColors[teamId] = sprintf('rgb(%d, %d, %d)',
+          Math.floor(Math.random() * 255),
+          Math.floor(Math.random() * 255),
+          Math.floor(Math.random() * 255));
+    }
+
     // Color
     var color_list = sprintf(
         '<td class = "colorbox" id = "team_%d_color"></td>', teamId);
