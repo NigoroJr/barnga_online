@@ -5,15 +5,17 @@ public class MessageWorldParams {
     public int worldSizeY;
     public int gridSize;
     public int playerSpeed;
+    public int scoreVisible;
 
     public MessageWorldParams() {
     }
 
     public MessageWorldParams(int worldSizeX, int worldSizeY,
-            int gridSize, int playerSpeed) {
+            int gridSize, int playerSpeed, int scoreVisible) {
         this.worldSizeX = worldSizeX;
         this.worldSizeY = worldSizeY;
         this.gridSize = gridSize;
         this.playerSpeed = playerSpeed;
+        this.scoreVisible = scoreVisible;
     }
 }

@@ -89,11 +89,8 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
 
             p.coord = configs.initialCoordinates(p.id, p.teamId);
             // Tell the client about world size etc.
-            MessageWorldParams mes = new MessageWorldParams(
-                    configs.getWorldSizeX(),
-                    configs.getWorldSizeY(),
-                    configs.getGridSize(),
-                    configs.getSpeed(p.teamId));
+            Util util = new Util(world, configs);
+            MessageWorldParams mes = util.makeWorldParamsMessage(p.teamId);
 
             c.sendEvent(Constants.EVENT_WORLD_PARAMS, mes);
             // Send player's identity

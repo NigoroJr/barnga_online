@@ -155,12 +155,8 @@ public class ConnectEventListener implements ConnectListener {
     }
 
     private void sendWorldParams(SocketIOClient client, int teamId) {
-        MessageWorldParams mes = new MessageWorldParams(
-                configs.getWorldSizeX(),
-                configs.getWorldSizeY(),
-                configs.getGridSize(),
-                configs.getSpeed(teamId));
-
+        Util util = new Util(world, configs);
+        MessageWorldParams mes = util.makeWorldParamsMessage(teamId);
         client.sendEvent(Constants.EVENT_WORLD_PARAMS, mes);
     }
 }

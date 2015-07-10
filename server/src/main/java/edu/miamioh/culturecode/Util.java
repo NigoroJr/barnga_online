@@ -1,6 +1,7 @@
 package edu.miamioh.culturecode;
 
 import edu.miamioh.culturecode.events.MessagePlayerCoord;
+import edu.miamioh.culturecode.events.MessageWorldParams;
 
 /**
  * A bunch of utility methods.
@@ -92,5 +93,15 @@ public class Util {
             new MessagePlayerCoord(fakePlayer, new Coordinates(newCoord));
 
         return mes;
+    }
+
+    public MessageWorldParams makeWorldParamsMessage(int teamId) {
+      MessageWorldParams mes = new MessageWorldParams(
+          configs.getWorldSizeX(),
+          configs.getWorldSizeY(),
+          configs.getGridSize(),
+          configs.getSpeed(teamId),
+          configs.getScoreVisibility(teamId));
+      return mes;
     }
 }
