@@ -113,7 +113,7 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
     private void getTeamAssignment(String listName, Toml toml) {
         List<Long> list = toml.getList(listName);
 
-        if (list == null) {
+        if (list == null || list.size() == 0) {
             return;
         }
 
@@ -126,7 +126,7 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
     private void processList(String listName, Toml toml, int[] arr) {
         List<Long> list = toml.getList(listName);
 
-        if (list == null) {
+        if (list == null || list.size() == 0) {
             return;
         }
 
