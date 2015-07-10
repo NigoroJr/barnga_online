@@ -47,10 +47,6 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
         Player player = new Player(message.player, configs);
         Coordinates newCoord = message.newCoord;
 
-        Util.debug("Request from Player ID %d of Team %d from %s to %s\n",
-                player.id, player.teamId,
-                player.coord.toString(), newCoord.toString());
-
         // Handle move
         handlePlayer(player, newCoord);
 
