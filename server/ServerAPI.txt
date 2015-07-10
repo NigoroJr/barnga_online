@@ -45,10 +45,11 @@ MessagePointsUpdate
     newPoint : int
 
 MessageWorldParams
-    worldSizeX  : int
-    worldSizeY  : int
-    gridSize    : int
-    playerSpeed : int
+    worldSizeX   : int
+    worldSizeY   : int
+    gridSize     : int
+    playerSpeed  : int
+    scoreVisible : boolean
 
 
 Events FROM server

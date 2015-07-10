@@ -61,6 +61,7 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
             otherTeamFoodPoints = new int[TEAM_NUMBER];
             foodRegeneration = new int[TEAM_NUMBER];
             randomFoodRegeneration = new int[TEAM_NUMBER];
+            scoreVisibility = new int[TEAM_NUMBER];
         }
 
         if ((val = toml.getLong("World.food_per_player")) != null) {
@@ -78,6 +79,7 @@ public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
         processTable("Visibility.player", toml, playerVisibility);
         processTable("Visibility.food_visible", toml, foodVisibility);
         processTable("Visibility.food_eatable", toml, foodEatability);
+        processList("Visibility.scoreboard", toml, scoreVisibility);
         processList("Team.speed", toml, speed);
         processList("Team.own_team_food_points", toml, ownTeamFoodPoints);
         processList("Team.other_team_food_points", toml, otherTeamFoodPoints);

@@ -50,6 +50,7 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
         {3, 3, 3, 3},   // Team 3: Everything looks the same
     };
     public static final int[] DEFAULT_SPEED = {2, 2, 2, 2};
+    public static final int[] DEFAULT_SCORE_VISIBILITY = {T, T, T, T};
 
     /* Will get updated on reading configuration file */
     /* Note: These are NOT constants (even though they act like them) */
@@ -74,6 +75,7 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     protected int[] otherTeamFoodPoints = DEFAULT_OTHER_TEAM_FOOD_POINTS;
     protected int[] foodRegeneration = DEFAULT_FOOD_REGENERATION;
     protected int[] randomFoodRegeneration = DEFAULT_FOOD_REGENERATION;
+    protected int[] scoreVisibility = DEFAULT_SCORE_VISIBILITY;
 
     protected int[] teamAssignment;
     private int playerCounter = 0;
@@ -324,5 +326,9 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
 
     public int getGameInterval() {
         return GAME_INTERVAL;
+    }
+
+    public int getScoreVisibility(int teamId) {
+        return scoreVisibility[teamId];
     }
 }

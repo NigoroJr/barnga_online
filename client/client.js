@@ -72,7 +72,8 @@ var worldInfo = {
 //The player's information
 var playerInfo = {
   size : 25,
-  speed : 2
+  speed : 2,
+  scoreVisible : true
 };
 
 //The food information
@@ -428,7 +429,12 @@ socket.on('disconnect', function(MessagePlayerId) {
 
 socket.on('gameStart', function() {
   console.log('Game has started');
-  toggleVisibility('scoreboard', 'visible');
+  if (playerInfo.scoreVisible) {
+    toggleVisibility('scoreboard', 'visible');
+  }
+  else {
+    toggleVisibility('scoreboard', 'hidden');
+  }
   startGame = true;
 
   (function animationLoop() {
@@ -442,6 +448,7 @@ socket.on('gameStart', function() {
 socket.on('gameEnd', function() {
   console.log('Game has ended');
   startGame = false;
+  toggleVisibility('scoreboard', 'visible');
 
   var origTop = $('#scoreboard').css('top');
   var origRight = $('#scoreboard').css('right');
@@ -493,6 +500,7 @@ socket.on('worldParams', function(MessageWorldParams) {
   initFood(food);
 
   playerInfo.speed = MessageWorldParams.playerSpeed;
+  playerInfo.scoreVisible = MessageWorldParams.scoreVisible == 1;
 });
 
 socket.on('playerUpdate', function(MessagePlayerCoord) {

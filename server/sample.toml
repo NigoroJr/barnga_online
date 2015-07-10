@@ -69,3 +69,6 @@ food_eatable = [
   [0, 1, 1, 0],
   [0, 1, 0, 1],
 ]
+
+# Whether or not teams can see the current scores
+scoreboard = [1, 0, 1, 0]
