@@ -6,7 +6,10 @@ var screenHeight = window.innerHeight;
 var socket = io.connect('http://localhost:3000');
 
 //Team Colors
-var teamColors = ['#FF0000', '#ffff00', '#00ff00', '#0000ff'];
+var teamColors = [
+  '#00FFA7', '#010DE8', '#FF0C8B', '#E88001', '#D6FF01',
+  '#FFD00B', '#E8380A', '#A718FF', '#0A9FE8', '#10FF0D',
+];
 
 //Personalized for any screen size
 var bufferX = screenWidth / 2;
@@ -115,6 +118,7 @@ function getTile(x, y) {
 
 //Variables to hold all of the current details about player and food
 var players = {};
+var teams = [];
 var food = [];
 initFood(food);
 // Dummy data
@@ -505,6 +509,24 @@ socket.on('worldParams', function(MessageWorldParams) {
 
 socket.on('playerUpdate', function(MessagePlayerCoord) {
   var playerID = MessagePlayerCoord.player.id;
+  var teamId = MessagePlayerCoord.player.teamId;
+  // First time to see the team
+  if (typeof teams[teamId] === 'undefined') {
+    // Color
+    var color_list = sprintf(
+        '<td class = "colorbox" id = "team_%d_color"></td>', teamId);
+    // Points
+    var points_list = sprintf(
+        '<td class = "points" id = "team_%d_points"></td>', teamId);
+    // Put them together
+    var team_list = sprintf('<tr class = "team" id = "team_%d">%s%s</tr>',
+        teamId, color_list, points_list);
+
+    $('#scoreboard').append(team_list);
+    $(sprintf('#team_%d_color', teamId)).css('background', teamColors[teamId]);
+
+    teams[teamId] = true;
+  }
 
   if (playerID == myPlayer.id) {
     myPlayer.coord = MessagePlayerCoord.newCoord;
@@ -530,7 +552,7 @@ socket.on('foodUpdate', function(MessageFoodCoord) {
 socket.on('pointsUpdate', function(mes) {
   var teamId = mes.teamId;
   var newPoint = mes.newPoint;
-  document.getElementById(String(teamId)).innerHTML = newPoint;
+  $(sprintf('#team_%d_points', teamId)).html(newPoint);
 });
 
 /**

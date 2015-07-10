@@ -10,83 +10,30 @@ html, body { width:100%; height:100%; }
 
 canvas { display:block; }
 
-.scoreboard {
+li {
+  list-style: none;
+}
+
+#scoreboard {
   position: absolute;
   width: 150px;
-  height: 160px;
   top: 10px;
   right: 10px;
+  padding: 10px 0px;
   background: rgba(200, 200, 200, 0.7);
 }
 
-.red_team {
-  position: absolute;
-  width: 50px;
-  height: 20px;
-  top: 10px;
-  left: 10px;
-  background: rgba(250, 0, 0, 0.7);
+.team {
+  margin: 5px;
 }
 
-.yellow_team {
-  position: absolute;
+.colorbox {
   width: 50px;
   height: 20px;
-  top: 50px;
-  left: 10px;
-  background: rgba(255, 255, 0, 0.7);
 }
 
-.green_team {
-  position: absolute;
+.points {
   width: 50px;
   height: 20px;
-  top: 90px;
-  left: 10px;
-  background: rgba(0, 255, 0, 0.7);
-}
-
-.blue_team {
-  position: absolute;
-  width: 50px;
-  height: 20px;
-  top: 130px;
-  left: 10px;
-  background: rgba(0, 0, 255, 0.7);
-}
-
-.red_label {
-  position: absolute;
-  width: 50px;
-  height: 20px;
-  top: 10px;
-  left: 90px;
-  text-align: center;
-}
-
-.yellow_label {
-  position: absolute;
-  width: 50px;
-  height: 20px;
-  top: 50px;
-  left: 90px;
-  text-align: center;
-}
-
-.green_label {
-  position: absolute;
-  width: 50px;
-  height: 20px;
-  top: 90px;
-  left: 90px;
-  text-align: center;
-}
-
-.blue_label {
-  position: absolute;
-  width: 50px;
-  height: 20px;
-  top: 130px;
-  left: 90px;
   text-align: center;
 }
