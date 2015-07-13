@@ -40,7 +40,7 @@ public class DisconnectEventListener implements DisconnectListener {
         Util.debug("Player %d of Team %d has disconnected\n", p.id, p.teamId);
 
         // Inform other players about the disconnect
-        for (Team<Player> t : world.getTeams().values()) {
+        for (Team t : world.getTeams().values()) {
             if (!t.canSee(p)) {
                 continue;
             }

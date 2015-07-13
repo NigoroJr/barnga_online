@@ -18,27 +18,27 @@ public class TeamTest extends TestCase {
     }
 
     public void testAppearsTo() {
-        Team<Player> t;
+        Team t;
 
-        t = new Team<Player>(0, configs);
+        t = new Team(0, configs);
         assertTrue(t.appearsTo(0) == 0);
         assertTrue(t.appearsTo(1) == 2);
         assertTrue(t.appearsTo(2) == 0);
         assertTrue(t.appearsTo(3) == CulturecodeConfigsDefault.INVISIBLE);
 
-        t = new Team<Player>(1, configs);
+        t = new Team(1, configs);
         assertTrue(t.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(t.appearsTo(1) == 1);
         assertTrue(t.appearsTo(2) == 1);
         assertTrue(t.appearsTo(3) == 1);
 
-        t = new Team<Player>(2, configs);
+        t = new Team(2, configs);
         assertTrue(t.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(t.appearsTo(1) == 3);
         assertTrue(t.appearsTo(2) == 2);
         assertTrue(t.appearsTo(3) == CulturecodeConfigsDefault.INVISIBLE);
 
-        t = new Team<Player>(3, configs);
+        t = new Team(3, configs);
         assertTrue(t.appearsTo(0) == CulturecodeConfigsDefault.INVISIBLE);
         assertTrue(t.appearsTo(1) == 0);
         assertTrue(t.appearsTo(2) == 3);
@@ -48,7 +48,7 @@ public class TeamTest extends TestCase {
     public void testCanSeeFood() {
         // Can see food?
         Food f;
-        Team<Player> t;
+        Team t;
         world.addPlayer(new Player(42, 0, new Coordinates(42, 42), configs), 0);
         world.addPlayer(new Player(42, 1, new Coordinates(42, 42), configs), 1);
         world.addPlayer(new Player(42, 2, new Coordinates(42, 42), configs), 2);
@@ -70,7 +70,7 @@ public class TeamTest extends TestCase {
 
     public void testCanSeePlayer() {
         Player target;
-        Team<Player> t;
+        Team t;
         world.addPlayer(new Player(42, 0, new Coordinates(42, 42), configs), 0);
         world.addPlayer(new Player(42, 1, new Coordinates(42, 42), configs), 1);
         world.addPlayer(new Player(42, 2, new Coordinates(42, 42), configs), 2);

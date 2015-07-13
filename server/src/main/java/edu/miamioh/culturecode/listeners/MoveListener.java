@@ -183,7 +183,7 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
      */
     private void broadcastPlayer(Player player, Coordinates newCoord) {
         // Broadcast to team
-        for (Team<Player> t : player.seenBy()) {
+        for (Team t : player.seenBy()) {
             if (t == null) {
                 continue;
             }
@@ -211,7 +211,7 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
      * @param gone whether the food is gone from the world or not
      */
     private void broadcastFood(Food food, boolean gone) {
-        for (Team<Player> t : food.seenBy()) {
+        for (Team t : food.seenBy()) {
             if (t == null) {
                 continue;
             }

@@ -9,27 +9,38 @@ import java.util.HashSet;
  *
  * @author Naoki MIzuno
  */
-@SuppressWarnings("hiding")
-public class Team<Player> extends java.util.HashSet<Player> {
-    /**
-     * Generated serial version UID.
-     */
-    private static final long serialVersionUID = -7556585430178027176L;
+public class Team {
+    protected HashSet<Player> players;
     protected int teamId;
     protected CulturecodeConfigsDefault configs = null;
 
     public Team() {
-        super();
     }
 
     public Team(int teamId) {
-        super();
         this.teamId = teamId;
+        this.players = new HashSet<Player>();
     }
 
     public Team(int teamId, CulturecodeConfigsDefault configs) {
         this(teamId);
         this.configs = configs;
+    }
+
+    public void add(Player p) {
+        players.add(p);
+    }
+
+    public void remove(Player p) {
+        players.remove(p);
+    }
+
+    public int size() {
+        return players.size();
+    }
+
+    public HashSet<Player> players() {
+        return players;
     }
 
     public int getTeamId() {
@@ -44,27 +55,26 @@ public class Team<Player> extends java.util.HashSet<Player> {
         return food.seenBy().contains(this);
     }
 
-    public boolean canSee(edu.miamioh.culturecode.Player player) {
+    public boolean canSee(Player player) {
         return canSee(player.teamId);
     }
 
-    public boolean canSee(
-            edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player> team) {
+    public boolean canSee(Team team) {
         return canSee(team.teamId);
     }
 
     public boolean canSee(int teamId) {
         int self = this.teamId;
         int other = teamId;
-        return configs.getPlayerVisibility()[self][other] != CulturecodeConfigsDefault.INVISIBLE;
+        return configs.getPlayerVisibility()[self][other]
+                != CulturecodeConfigsDefault.INVISIBLE;
     }
 
-    public int appearsTo(edu.miamioh.culturecode.Player player) {
+    public int appearsTo(Player player) {
         return appearsTo(player.teamId);
     }
 
-    public int appearsTo(
-            edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player> team) {
+    public int appearsTo(Team team) {
         return appearsTo(team.getTeamId());
     }
 
@@ -75,9 +85,8 @@ public class Team<Player> extends java.util.HashSet<Player> {
         return configs.getPlayerVisibility()[self][other];
     }
 
-    public HashSet<Team<edu.miamioh.culturecode.Player>> seenBy() {
-        HashSet<Team<edu.miamioh.culturecode.Player>> ret =
-                new HashSet<edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player>>();
+    public HashSet<Team> seenBy() {
+        HashSet<Team> ret = new HashSet<Team>();
 
         int[][] playerVisibility = configs.getPlayerVisibility();
         for (int i = 0; i < playerVisibility.length; i++) {
@@ -91,9 +100,8 @@ public class Team<Player> extends java.util.HashSet<Player> {
         return ret;
     }
 
-    public HashSet<edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player>> getVisibleTeams() {
-        HashSet<Team<edu.miamioh.culturecode.Player>> ret =
-                new HashSet<edu.miamioh.culturecode.Team<edu.miamioh.culturecode.Player>>();
+    public HashSet<Team> getVisibleTeams() {
+        HashSet<Team> ret = new HashSet<Team>();
 
         int[][] playerVisibility = configs.getPlayerVisibility();
         for (int i = 0; i < playerVisibility.length; i++) {
@@ -116,8 +124,7 @@ public class Team<Player> extends java.util.HashSet<Player> {
             return false;
         }
 
-        @SuppressWarnings("unchecked")
-        Team<Player> other = (Team<Player>)obj;
+        Team other = (Team) obj;
         return this.teamId == other.teamId;
     }
 }
