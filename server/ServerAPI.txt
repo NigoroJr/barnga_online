@@ -93,6 +93,3 @@ Events TO server
 * disconnect
 * move
     - MessagePlayerCoord
-
-Optional
-* teamSelected
