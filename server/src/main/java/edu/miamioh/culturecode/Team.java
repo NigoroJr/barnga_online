@@ -70,14 +70,35 @@ public class Team {
                 != CulturecodeConfigsDefault.INVISIBLE;
     }
 
+    /**
+     * How this team appears to the given player.
+     *
+     * @param player the player looking at this team
+     *
+     * @return the team ID of the team that this team appears to be
+     */
     public int appearsTo(Player player) {
         return appearsTo(player.teamId);
     }
 
+    /**
+     * How this team appears to the given team.
+     *
+     * @param team the team looking at this team
+     *
+     * @return the team ID of the team that this team appears to be
+     */
     public int appearsTo(Team team) {
         return appearsTo(team.getTeamId());
     }
 
+    /**
+     * How this team appears to the given team.
+     *
+     * @param teamId the team looking at this team
+     *
+     * @return the team ID of the team that this team appears to be
+     */
     public int appearsTo(int teamId) {
         int self = teamId;
         int other = this.teamId;
@@ -85,6 +106,14 @@ public class Team {
         return configs.getPlayerVisibility()[self][other];
     }
 
+    /**
+     * Returns the set of teams that can see this team.
+     *
+     * Note that this is NOT the set of teams that this team can see. For
+     * that, use getVisibleTeams().
+     *
+     * @return HashSet of the teams that can see this player
+     */
     public HashSet<Team> seenBy() {
         HashSet<Team> ret = new HashSet<Team>();
 
@@ -100,6 +129,11 @@ public class Team {
         return ret;
     }
 
+    /**
+     * Returns the set of teams that this team can see.
+     *
+     * @return HashSet of the teams that this team can see
+     */
     public HashSet<Team> getVisibleTeams() {
         HashSet<Team> ret = new HashSet<Team>();
 
@@ -124,7 +158,7 @@ public class Team {
             return false;
         }
 
-        Team other = (Team) obj;
+        Team other = (Team)obj;
         return this.teamId == other.teamId;
     }
 }

@@ -57,14 +57,35 @@ public class Food {
         return ret;
     }
 
+    /**
+     * How this food looks to the given player.
+     *
+     * @param player the player looking at this food
+     *
+     * @return the team ID of the team that this food appears to belong to
+     */
     public int appearsTo(Player player) {
         return appearsTo(player.teamId);
     }
 
+    /**
+     * How this food looks to the given team.
+     *
+     * @param team the team looking at this food
+     *
+     * @return the team ID of the team that this food appears to belong to
+     */
     public int appearsTo(Team team) {
         return appearsTo(team.getTeamId());
     }
 
+    /**
+     * How this food looks to the given team.
+     *
+     * @param teamId the team looking at this food
+     *
+     * @return the team ID of the team that this food appears to belong to
+     */
     public int appearsTo(int teamId) {
         int self = teamId;
         int other = team;
