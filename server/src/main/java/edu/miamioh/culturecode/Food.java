@@ -42,8 +42,8 @@ public class Food {
     /**
      * Returns the set of teams that can see this food.
      */
-    public HashSet<Team<Player>> seenBy() {
-        HashSet<Team<Player>> ret = new HashSet<Team<Player>>();
+    public HashSet<Team> seenBy() {
+        HashSet<Team> ret = new HashSet<Team>();
 
         int[][] foodVisibility = configs.getFoodVisibility();
         for (int i = 0; i < foodVisibility.length; i++) {
@@ -61,7 +61,7 @@ public class Food {
         return appearsTo(player.teamId);
     }
 
-    public int appearsTo(Team<Player> team) {
+    public int appearsTo(Team team) {
         return appearsTo(team.getTeamId());
     }
 

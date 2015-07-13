@@ -83,8 +83,8 @@ public class ConnectEventListener implements ConnectListener {
     private void sendPlayers(Player player, SocketIOClient client) {
         Util util = new Util(world, configs);
         // Broadcast about existing players to new player
-        for (Team<Player> t : world.getTeams().values()) {
-            for (Player otherPlayer : t) {
+        for (Team t : world.getTeams().values()) {
+            for (Player otherPlayer : t.players()) {
                 // If the new player can't see the existing player
                 if (!player.canSee(otherPlayer)) {
                     continue;
@@ -100,7 +100,7 @@ public class ConnectEventListener implements ConnectListener {
         }
 
         // Send message to currently existing teams
-        for (Team<Player> t : world.getTeams().values()) {
+        for (Team t : world.getTeams().values()) {
             if (!t.canSee(player)) {
                 continue;
             }
@@ -120,7 +120,7 @@ public class ConnectEventListener implements ConnectListener {
      */
     private void sendFoods(Player player, SocketIOClient client) {
         // Send message to currently existing teams including the new player
-        for (Team<Player> t : world.getTeams().values()) {
+        for (Team t : world.getTeams().values()) {
             for (Food f : world.getFoods().values()) {
                 if (!t.canSee(f)) {
                     continue;

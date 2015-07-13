@@ -7,7 +7,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 
 public class WorldState {
     /* teamId => Team, which is a HashSet of Player */
-    protected HashMap<Integer, Team<Player>> teams;
+    protected HashMap<Integer, Team> teams;
     /* foodId => Food */
     protected HashMap<Integer, Food> foods;
     /* teamId => Points */
@@ -37,7 +37,7 @@ public class WorldState {
     }
 
     public void reset() {
-        teams = new HashMap<Integer, Team<Player>>();
+        teams = new HashMap<Integer, Team>();
         foods = new HashMap<Integer, Food>();
         points = new HashMap<Integer, Points>();
         gameStarted = false;
@@ -48,7 +48,7 @@ public class WorldState {
      *
      * @return Dictionary (key: team ID, value: HashSet of Player)
      */
-    public HashMap<Integer, Team<Player>> getTeams() {
+    public HashMap<Integer, Team> getTeams() {
         return teams;
     }
 
@@ -57,7 +57,7 @@ public class WorldState {
      *
      * @return the Team object. null if team doesn't exist.
      */
-    public Team<Player> getTeam(int teamId) {
+    public Team getTeam(int teamId) {
         return teams.get(teamId);
     }
 
@@ -70,8 +70,8 @@ public class WorldState {
      */
     public HashMap<Integer, Player> getPlayers() {
         HashMap<Integer, Player> players = new HashMap<Integer, Player>();
-        for (Team<Player> t : teams.values()) {
-            for (Player p : t) {
+        for (Team t : teams.values()) {
+            for (Player p : t.players()) {
                 players.put(p.id, p);
             }
         }
@@ -116,7 +116,7 @@ public class WorldState {
      */
     public void addPlayer(Player player, int teamId) {
         if (!teams.containsKey(teamId)) {
-            teams.put(teamId, new Team<Player>(teamId, player.getConfigs()));
+            teams.put(teamId, new Team(teamId, player.getConfigs()));
         }
 
         // Initialize points if it's first time adding points
@@ -124,8 +124,7 @@ public class WorldState {
             points.put(teamId, new Points());
         }
 
-
-        Team<Player> playerTeam = teams.get(teamId);
+        Team playerTeam = teams.get(teamId);
         playerTeam.add(player);
     }
 

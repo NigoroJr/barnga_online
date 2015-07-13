@@ -60,7 +60,7 @@ public class Util {
      *
      * @param player the player that the message is about
      */
-    public MessagePlayerCoord makeFakePlayerMessage(Team<Player> team,
+    public MessagePlayerCoord makeFakePlayerMessage(Team team,
             Player player, Coordinates newCoord) {
         return makeFakePlayerMessage(team.getTeamId(), player, newCoord);
     }
