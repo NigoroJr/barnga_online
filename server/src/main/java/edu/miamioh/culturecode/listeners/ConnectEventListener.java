@@ -8,9 +8,9 @@ import com.corundumstudio.socketio.SocketIONamespace;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 
-import edu.miamioh.culturecode.CulturecodeConfigsDefault;
 import edu.miamioh.culturecode.Constants;
 import edu.miamioh.culturecode.Coordinates;
+import edu.miamioh.culturecode.CulturecodeConfigsDefault;
 import edu.miamioh.culturecode.Food;
 import edu.miamioh.culturecode.Player;
 import edu.miamioh.culturecode.Team;
