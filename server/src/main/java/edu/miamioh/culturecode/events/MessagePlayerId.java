@@ -4,8 +4,8 @@ import edu.miamioh.culturecode.Coordinates;
 import edu.miamioh.culturecode.Player;
 
 /**
- * Container class for telling a newly connected user its identity such as ID,
- * team, and the starting coordinates.
+ * Class used for sending Player identity such as ID, team, and starting
+ * coordinates to clients via netty-socketio.
  *
  * @author Naoki Mizuno
  */

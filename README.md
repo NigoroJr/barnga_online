@@ -34,7 +34,8 @@ program.
 #### Compiling from source
 1. `git clone https://github.com/NigoroJr/culturecode`
 2. `cd culturecode/server`
-3. `mvn assembly:single`
+3. `mvn clean install`
+4. `mvn assembly:single`
 
 ### Running
 1. Edit `server/culturecode.conf`
@@ -43,16 +44,24 @@ program.
 3. Edit `client/client.js` and change `localhost` to whatever your webpage's
    address is, and put it to a publicly-accessibly directory.
 
+See the Wiki page for more details.
+
 ## Configurations
 Adding a TOML file in the same directory as the jar file allows customizing
 basic behavior of the game. For example, the world size, number of teams, and
 how each team can see other teams/food can be defined in this file. See the
 provided `sample.toml` for various parameters.
 
-## TODO
-* detailed installation guide
-* configurations
-* limitations
+## Limitations
+Testing has been done with:
+
+* 17 clients in 10 teams simultaneously moving in a 60,000 x 60,000 world with
+  approximately 500 food.
+* 4 teams in 30,000 x 30,000 world with approximately 20,000 food.
+
+The current limitation, due to the world scrolling when pressing the arrow
+keys in Firefox, is that the browser's default keyboard shortcuts become
+unavailable (like F5 for refreshing).
 
 ## License
 MIT License

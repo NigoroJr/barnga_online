@@ -22,6 +22,11 @@ import edu.miamioh.culturecode.events.MessagePlayerId;
 import edu.miamioh.culturecode.events.MessagePointsUpdate;
 import edu.miamioh.culturecode.events.MessageWorldParams;
 
+/**
+ * Listener for EVENT_CONNECT events.
+ *
+ * @author Naoki Mizuno
+ */
 public class ConnectEventListener implements ConnectListener {
     protected WorldState world;
     protected CulturecodeConfigsDefault configs;
@@ -36,6 +41,13 @@ public class ConnectEventListener implements ConnectListener {
         this.server = server;
     }
 
+    /**
+     * Handles newly connected clients.
+     *
+     * When a client connects, the client is assigned an ID, a team, and its
+     * starting coordinates. The connected player and the relevant
+     * already-connected players both receive information about each others.
+     */
     @Override
     public void onConnect(SocketIOClient client) {
         // Assign player to a team
@@ -80,6 +92,14 @@ public class ConnectEventListener implements ConnectListener {
         }
     }
 
+    /**
+     * Sends the player information to the new player and the relevant
+     * existing players.
+     *
+     * @param player the new player
+     *
+     * @param client the corresponding SocketIOClient object of that player
+     */
     private void sendPlayers(Player player, SocketIOClient client) {
         Util util = new Util(world, configs);
         // Broadcast about existing players to new player
@@ -117,6 +137,10 @@ public class ConnectEventListener implements ConnectListener {
     /**
      * Sends to the newly connected client about the current status of the
      * food.
+     *
+     * @param player the new player
+     *
+     * @param client the corresponding SocketIOClient object of that player
      */
     private void sendFoods(Player player, SocketIOClient client) {
         // Send message to currently existing teams including the new player
