@@ -3,7 +3,7 @@ package edu.miamioh.culturecode.events;
 import edu.miamioh.culturecode.Player;
 
 /**
- * Container class used when sending points update to client.
+ * Class used for sending Points updates to clients via netty-socketio.
  *
  * @author Naoki Mizuno
  */

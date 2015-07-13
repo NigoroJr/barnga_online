@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.moandjiezana.toml.Toml;
 
+/**
+ * Read rules configurations from a file.
+ *
+ * @author Naoki Mizuno
+ */
 public class CulturecodeConfigsFromFile extends CulturecodeConfigsDefault {
     protected Toml toml;
 

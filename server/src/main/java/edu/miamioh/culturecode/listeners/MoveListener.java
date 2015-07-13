@@ -23,7 +23,7 @@ import edu.miamioh.culturecode.events.MessagePointsUpdate;
 import edu.miamioh.culturecode.events.MessageWorldParams;
 
 /**
- * Listeners for when receiving the EVENT_MOVE event.
+ * Listener for EVENT_MOVE events.
  *
  * @author Naoki Mizuno
  */
@@ -63,6 +63,18 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
         }
     }
 
+    /**
+     * Starts a new round.
+     *
+     * The method:
+     *
+     * 1. Waits for a while (for the players to check their scores)
+     * 2. Assigns each player a new team
+     * 3. Assigns each player new coordinates to start
+     * 4. Generates food per player
+     * 5. Broadcast these values to all relevant players
+     * 6. Starts the game
+     */
     private void restartGame() {
         try {
             Thread.sleep(configs.getGameInterval() * 1000);
@@ -112,6 +124,12 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
 
     /**
      * Handles the player's move-related response on receiving data.
+     *
+     * This includes:
+     *
+     * - checking if the player can move to the requested coordinates
+     * - broadcasting to all relevant players if move is valid
+     * - update player's coordinates to new coordinates
      */
     private void handlePlayer(Player player, Coordinates newCoord) {
         Player otherPlayer =
@@ -134,6 +152,13 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
 
     /**
      * Handles the food-related response on receiving player move.
+     *
+     * This includes:
+     *
+     * - checking if there's food within eatable range
+     * - checking if food is eatable
+     * - calling the callback method
+     * - broadcasting the change to all relevant players
      */
     private void handleFood(Player player, Coordinates newCoord) {
         Food food;

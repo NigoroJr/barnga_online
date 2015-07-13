@@ -1,6 +1,8 @@
 package edu.miamioh.culturecode;
 
 /**
+ * Constants used for Culturecode.
+ *
  * @author Naoki Mizuno
  */
 public class Constants {
@@ -31,6 +33,4 @@ public class Constants {
 
     /* Events sent TO the server */
     public static final String EVENT_MOVE = "move";
-    // Note: Following events are optional for the prototype
-    public static final String EVENT_TEAM_SELECTED = "teamSelected";
 }

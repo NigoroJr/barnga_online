@@ -10,9 +10,9 @@ import java.util.HashSet;
 public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     /* Invisible */
     public static final int INVISIBLE = -1;
-    // Just an abbreviation to make the table look nicer
+    // Just an abbreviation to make the tables look nicer
     public static final int I = INVISIBLE;
-    /* Eatable? */
+    /* True and False */
     public static final int T = 1;
     public static final int F = 0;
 
@@ -53,7 +53,6 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     public static final int[] DEFAULT_SCORE_VISIBILITY = {T, T, T, T};
 
     /* Will get updated on reading configuration file */
-    /* Note: These are NOT constants (even though they act like them) */
     protected int WORLD_X = DEFAULT_WORLD_X;
     protected int WORLD_Y = DEFAULT_WORLD_Y;
     protected int GAME_INTERVAL = DEFAULT_GAME_INTERVAL;
@@ -107,7 +106,7 @@ public class CulturecodeConfigsDefault implements CulturecodeConfigs {
     }
 
     /**
-     * Randomnly assign a new starting point for the player.
+     * Randomly assign new starting coordinates for the player.
      */
     @Override
     public Coordinates initialCoordinates(long playerId, int teamId) {

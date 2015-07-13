@@ -4,7 +4,7 @@ import edu.miamioh.culturecode.Coordinates;
 import edu.miamioh.culturecode.Food;
 
 /**
- * Container class for representing a player on the field.
+ * Class used for sending Food information to clients via netty-socketio.
  *
  * @author Naoki Mizuno
  */

@@ -14,7 +14,7 @@ import edu.miamioh.culturecode.WorldState;
 import edu.miamioh.culturecode.events.MessagePlayerId;
 
 /**
- * Listeners for when receiving the EVENT_DISCONNECT event.
+ * Listener for EVENT_DISCONNECT events.
  *
  * @author Naoki Mizuno
  */
@@ -33,6 +33,13 @@ public class DisconnectEventListener implements DisconnectListener {
         this.server = server;
     }
 
+    /**
+     * Handles EVENT_DISCONNECT events.
+     *
+     * This method informs the other players about the disconnected player,
+     * and checks whether there are enough players to continue the game or
+     * not.
+     */
     @Override
     public void onDisconnect(SocketIOClient client) {
         Player p = world.getClients().get(client);
