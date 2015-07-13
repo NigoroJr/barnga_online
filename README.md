@@ -52,6 +52,9 @@ basic behavior of the game. For example, the world size, number of teams, and
 how each team can see other teams/food can be defined in this file. See the
 provided `sample.toml` for various parameters.
 
+Also check the [Wiki](https://github.com/NigoroJr/culturecode/wiki) for more
+details.
+
 ## Limitations
 Testing has been done with:
 
